@@ -1,7 +1,9 @@
 package com.ciattisevillanotroncoso;
 
+import com.ciattisevillanotroncoso.view.MainMenu;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
+import sun.applet.Main;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +24,8 @@ public class App {
         initInputHandlers();
         System.out.println("Bienvenido!");
         mainMenu();
+        //TODO: meter algun loop para que el programa siga corriendo (buscar un lugar piola o significativo)
+        // IDEA: que sea algo llamando al MainMenu si no hay ningún NativeKeyListener en el GlobalScreen
     }
 
     static private void initInputHandlers(){
@@ -41,9 +45,6 @@ public class App {
     }
 
     static private void mainMenu(){
-        System.out.println("1. Personal");
-        System.out.println("2. Pacientes");
-        System.out.println("3. Ambulancias");
-        GlobalScreen.addNativeKeyListener();
+        GlobalScreen.addNativeKeyListener(new MainMenu());
     }
 }

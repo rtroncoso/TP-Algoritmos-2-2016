@@ -12,6 +12,7 @@ import java.util.List;
 public class Clinic {
     List<Doctor> doctors;
 
+    //TODO: Armar todo el modelo... basically... hehehe
     public Clinic(){
         doctors = new ArrayList<Doctor>();
     }

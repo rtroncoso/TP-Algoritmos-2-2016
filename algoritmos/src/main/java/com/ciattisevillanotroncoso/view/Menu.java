@@ -1,17 +1,32 @@
 package com.ciattisevillanotroncoso.view;
 
-import java.util.List;
+import com.ciattisevillanotroncoso.util.KeyboardListener;
+
+import java.util.ArrayList;
 
 /**
  * Created with IntelliJ IDEA by: alejandro
  * Date: 24/06/16
  * Time: 14:20
  */
-public class Menu {
-    List<String> options;
+public class Menu extends KeyboardListener {
 
-    public Menu(List<String> options){
-        this.options = options;
+    protected String title;
+    protected ArrayList<String> options;
 
+    protected void listOptions(){
+        System.out.println("#####################");
+        System.out.println("    " + title);
+        System.out.println("#####################");
+        int optNumber = 1;
+        for (String option : options) {
+            System.out.println(optNumber+". "+option);
+            optNumber++;
+        }
+    }
+
+    protected void clearScreen(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
     }
 }
