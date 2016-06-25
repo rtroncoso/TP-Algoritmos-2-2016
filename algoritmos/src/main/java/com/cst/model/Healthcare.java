@@ -7,7 +7,10 @@ package com.cst.model;
  */
 public class Healthcare {
 
+    /** Discounts based on percentage for healthcare companies */
     private Long discount;
+
+    /** Stores company name */
     private String company;
 
     /**
@@ -52,4 +55,5 @@ public class Healthcare {
     public void setCompany(String company) {
         this.company = company;
     }
+
 }
