@@ -15,8 +15,7 @@ public class Clinic {
 
     /**
      * Clinic class constructor
-     * TODO :
-     *  - Should initialize all required models
+     * TODO : Should initialize all required models
      */
     public Clinic() {
         this.doctors = new ArrayList<Doctor>();
@@ -24,6 +23,12 @@ public class Clinic {
 
     /**
      * Obtains a list of all the doctor salaries
+     * TODO : Move this logic into a separate class,
+     *        as it should be able to calculate all
+     *        the stretcher salaries as long with
+     *        the other employee salaries.
+     *        (Punto 1 del tp)
+     *
      * @return List<Salary>
      */
     public List<Salary> getSalaries(){
