@@ -5,18 +5,27 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Created with IntelliJ IDEA by: alejandro
- * Date: 24/06/16
- * Time: 11:57
+ * Clinic class - Base container model
+ *
+ * @packaage com.ciattisevillanotroncoso.model
  */
 public class Clinic {
+
     List<Doctor> doctors;
 
-    //TODO: Armar todo el modelo... basically... hehehe
-    public Clinic(){
-        doctors = new ArrayList<Doctor>();
+    /**
+     * Clinic class constructor
+     * TODO :
+     *  - Should initialize all required models
+     */
+    public Clinic() {
+        this.doctors = new ArrayList<Doctor>();
     }
 
+    /**
+     * Obtains a list of all the doctor salaries
+     * @return List<Salary>
+     */
     public List<Salary> getSalaries(){
         List<Salary> salaries = new LinkedList<Salary>();
         for (Doctor doctor : doctors) {
@@ -24,4 +33,15 @@ public class Clinic {
         }
         return salaries;
     }
+
+    /**
+     * Adds a new doctor to the clinic
+     * @param doctor
+     * @return Clinic self-reference for chaining methods
+     */
+    public Clinic addDoctor(Doctor doctor) {
+        this.doctors.add(doctor);
+        return this;
+    }
+
 }

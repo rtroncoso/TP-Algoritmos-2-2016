@@ -8,6 +8,7 @@ import java.text.DecimalFormat;
  * Time: 12:06
  */
 public class Salary {
+
     Employee employee;
 
     public Salary(Employee employee){

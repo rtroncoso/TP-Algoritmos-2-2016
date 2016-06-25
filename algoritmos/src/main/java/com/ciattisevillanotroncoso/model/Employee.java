@@ -1,24 +1,40 @@
 package com.ciattisevillanotroncoso.model;
 
 /**
- * Created with IntelliJ IDEA by: alejandro
- * Date: 24/06/16
- * Time: 11:20
+ * Employee class - Base abstract class
+ *
+ * @package com.ciattisevillanotroncoso.model
  */
-public class Employee {
+public abstract class Employee {
+
     private String name;
     private Double salary;
 
-    public Employee(String name, Double salary){
+    /**
+     * Employee constructor - Must be implemented
+     *
+     * @param name
+     * @param salary
+     */
+    public Employee(String name, Double salary) {
         this.name = name;
         this.salary = salary;
     }
 
+    /**
+     * Employee name getter
+     * @return String
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Employee salary getter
+     * @return String
+     */
     public Double getSalary() {
         return salary;
     }
+
 }

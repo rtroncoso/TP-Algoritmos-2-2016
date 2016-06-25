@@ -10,4 +10,5 @@ public class Doctor extends Employee {
     public Doctor(String name, Double salary){
         super(name, salary);
     }
+
 }
