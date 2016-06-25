@@ -1,4 +1,4 @@
-package com.ciattisevillanotroncoso;
+package com.cst;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
@@ -35,4 +35,5 @@ public class AppTest
     {
         assertTrue( true );
     }
+
 }

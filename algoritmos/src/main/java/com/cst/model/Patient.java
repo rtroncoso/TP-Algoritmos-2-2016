@@ -1,11 +1,11 @@
-package com.ciattisevillanotroncoso.model;
+package com.cst.model;
 
 import java.util.Date;
 
 /**
  * Patient class
  *
- * @package com.ciattisevillanotroncoso
+ * @package com.cst
  */
 public class Patient {
 

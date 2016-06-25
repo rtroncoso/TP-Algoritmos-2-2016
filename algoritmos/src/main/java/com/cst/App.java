@@ -1,9 +1,8 @@
-package com.ciattisevillanotroncoso;
+package com.cst;
 
-import com.ciattisevillanotroncoso.view.MainMenu;
+import com.cst.view.MainMenu;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
-import sun.applet.Main;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,4 +47,5 @@ public class App {
     static private void mainMenu(){
         GlobalScreen.addNativeKeyListener(new MainMenu());
     }
+
 }

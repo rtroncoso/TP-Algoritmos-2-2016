@@ -1,4 +1,4 @@
-package com.ciattisevillanotroncoso.model;
+package com.cst.model;
 
 /**
  * Created with IntelliJ IDEA by: alejandro

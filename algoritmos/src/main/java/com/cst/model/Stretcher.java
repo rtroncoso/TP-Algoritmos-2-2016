@@ -1,9 +1,9 @@
-package com.ciattisevillanotroncoso.model;
+package com.cst.model;
 
 /**
  * Stretcher class - Translation: "Camillero"
  *
- * @package com.ciattisevillanotroncoso.model
+ * @package com.cst.model
  */
 public class Stretcher extends Employee {
 

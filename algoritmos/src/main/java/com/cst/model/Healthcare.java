@@ -1,9 +1,9 @@
-package com.ciattisevillanotroncoso.model;
+package com.cst.model;
 
 /**
  * Healthcare class - Translation: "Obra Social"
  *
- * @package com.ciattisevillanotroncoso.model
+ * @package com.cst.model
  */
 public class Healthcare {
 

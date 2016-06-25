@@ -1,20 +1,28 @@
-package com.ciattisevillanotroncoso.model;
+package com.cst.model;
 
 import java.text.DecimalFormat;
 
 /**
- * Created with IntelliJ IDEA by: alejandro
- * Date: 24/06/16
- * Time: 12:06
+ * Salary class
+ *
+ * @package com.cst.model
  */
 public class Salary {
 
     Employee employee;
 
+    /**
+     * Salary class constructor
+     * @param employee
+     */
     public Salary(Employee employee){
         this.employee = employee;
     }
 
+    /**
+     * Obtains the Salary in a prettified format
+     * @return
+     */
     public String getSalaryAsString(){
         Double salary = employee.getSalary();
         String prettyString = "$";
@@ -26,4 +34,5 @@ public class Salary {
     public String toString() {
         return employee.getName() + "   " + getSalaryAsString();
     }
+
 }

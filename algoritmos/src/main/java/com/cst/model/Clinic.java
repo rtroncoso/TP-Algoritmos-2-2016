@@ -1,4 +1,4 @@
-package com.ciattisevillanotroncoso.model;
+package com.cst.model;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Clinic class - Base container model
  *
- * @packaage com.ciattisevillanotroncoso.model
+ * @packaage com.cst.model
  */
 public class Clinic {
 

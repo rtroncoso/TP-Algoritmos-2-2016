@@ -21,13 +21,17 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.github.javafaker</groupId>
+      <artifactId>javafaker</artifactId>
+      <version>0.10</version>
+    </dependency>
     <!-- https://mvnrepository.com/artifact/com.1stleg/jnativehook -->
     <dependency>
       <groupId>com.1stleg</groupId>
       <artifactId>jnativehook</artifactId>
       <version>2.0.2</version>
     </dependency>
-
   </dependencies>
 
   <build>
@@ -44,16 +48,7 @@
           </execution>
         </executions>
         <configuration>
-          <mainClass>com.ciattisevillanotroncoso.App</mainClass>
-          <archive>
-            <archive>
-              <manifest>
-                <addClasspath>true</addClasspath>
-                <classpathPrefix>lib/</classpathPrefix>
-                <mainClass>com.ciattisevillanotroncoso.App</mainClass>
-              </manifest>
-            </archive>
-          </archive>
+          <mainClass>com.cst.App</mainClass>
         </configuration>
       </plugin>
 
@@ -67,7 +62,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>com.ciattisevillanotroncoso.App</mainClass>
+              <mainClass>com.cst.App</mainClass>
             </manifest>
           </archive>
         </configuration>
