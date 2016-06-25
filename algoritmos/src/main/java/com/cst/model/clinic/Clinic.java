@@ -34,6 +34,16 @@ public class Clinic {
     }
 
     /**
+     * Adds a new doctor to the clinic
+     * @param doctor
+     * @return Clinic self-reference for chaining methods
+     */
+    public Clinic addDoctor(Doctor doctor) {
+        this.doctors.add(doctor);
+        return this;
+    }
+
+    /**
      * Obtains a list of all the doctor salaries
      * TODO : Move this logic into a separate class,
      *        as it should be able to calculate all
@@ -49,16 +59,6 @@ public class Clinic {
             salaries.add(new Salary(doctor));
         }
         return salaries;
-    }
-
-    /**
-     * Adds a new doctor to the clinic
-     * @param doctor
-     * @return Clinic self-reference for chaining methods
-     */
-    public Clinic addDoctor(Doctor doctor) {
-        this.doctors.add(doctor);
-        return this;
     }
 
 }

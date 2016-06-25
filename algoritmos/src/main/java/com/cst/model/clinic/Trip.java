@@ -1,6 +1,11 @@
 package com.cst.model.clinic;
 
 import com.cst.model.employee.Stretcher;
+import com.cst.model.patient.Patient;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Trip class
@@ -26,18 +31,32 @@ public class Trip {
     /** Stretcher that carries on the trip */
     private Stretcher stretcher;
 
+    /** List of patients to be picked up */
+    private List<Patient> patients;
+
     /**
      * Trip class constructor
      * @param distance
      * @param stretcher
      */
-    public Trip(int distance, Stretcher stretcher) {
+    public Trip(int distance, Stretcher stretcher, ArrayList<Patient> patients) {
         this.travelled = 0;
         this.distance = distance;
         this.stretcher = stretcher;
+        this.patients = patients;
 
         // Trips start on route by default
         this.status = Trip.STATUS_ON_ROUTE;
+    }
+
+    /**
+     * One-patient Trip class constructor
+     * @param distance
+     * @param stretcher
+     * @param patient
+     */
+    public Trip(int distance, Stretcher stretcher, Patient patient) {
+        this(distance, stretcher, new ArrayList<Patient>((Collection<? extends Patient>) patient));
     }
 
     /**
