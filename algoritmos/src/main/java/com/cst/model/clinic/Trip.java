@@ -40,13 +40,10 @@ public class Trip {
      * @param stretcher
      */
     public Trip(int distance, Stretcher stretcher, ArrayList<Patient> patients) {
-        this.travelled = 0;
         this.distance = distance;
         this.stretcher = stretcher;
         this.patients = patients;
-
-        // Trips start on route by default
-        this.status = Trip.STATUS_ON_ROUTE;
+        this.travelled = 0;
     }
 
     /**
@@ -74,7 +71,7 @@ public class Trip {
      */
     public Trip travel(int distance) {
         // TODO : Supply a travel event for every kilometer carried on the trip
-        this.distance += distance;
+        this.travelled += travelled;
         return this;
     }
 

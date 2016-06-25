@@ -1,5 +1,7 @@
 package com.cst.model.clinic;
 
+import com.cst.events.Dispatcher;
+import com.cst.exceptions.NoDoctorAvailableException;
 import com.cst.exceptions.NoStretcherAvailableException;
 import com.cst.model.employee.Administrative;
 import com.cst.model.employee.Doctor;
@@ -17,13 +19,16 @@ import java.util.List;
 public class Clinic {
 
     /** List of doctors assigned to the clinic */
-    List<Doctor> doctors;
+    private List<Doctor> doctors;
 
     /** List of administrative employees assigned to the clinic*/
-    List<Administrative> administratives;
+    private List<Administrative> administratives;
 
     /** List of stretchers assigned to the clinic */
-    List<Stretcher> stretchers;
+    private List<Stretcher> stretchers;
+
+    /** Clinics will handle their own event dispatchers */
+    private Dispatcher dispatcher;
 
     /**
      * Clinic class constructor
@@ -33,6 +38,7 @@ public class Clinic {
         this.doctors = new ArrayList<Doctor>();
         this.administratives = new ArrayList<Administrative>();
         this.stretchers = new ArrayList<Stretcher>();
+        this.dispatcher = new Dispatcher();
     }
 
     /**
@@ -60,6 +66,20 @@ public class Clinic {
     }
 
     /**
+     * Obtains a free doctor from the stretchers pool
+     * @return Stretcher
+     */
+    public Doctor getFreeDoctor() throws NoDoctorAvailableException {
+        for(Doctor doctor : this.doctors) {
+            if(doctor.getStatus() == Employee.STATUS_WAITING) {
+                return doctor;
+            }
+        }
+
+        throw new NoDoctorAvailableException();
+    }
+
+    /**
      * Obtains a list of all the doctor salaries
      * TODO : Move this logic into a separate class,
      *        as it should be able to calculate all
@@ -75,6 +95,22 @@ public class Clinic {
             salaries.add(new Salary(doctor));
         }
         return salaries;
+    }
+
+    /**
+     * Clinic dispatcher getter
+     * @return Dispatcher
+     */
+    public Dispatcher getDispatcher() {
+        return dispatcher;
+    }
+
+    /**
+     * Clinic dispatcher setter
+     * @param dispatcher
+     */
+    public void setDispatcher(Dispatcher dispatcher) {
+        this.dispatcher = dispatcher;
     }
 
 }

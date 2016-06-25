@@ -15,13 +15,13 @@ public abstract class Employee {
     /**
      * Doctors status constants
      */
-    public static final int STATUS_VISIT = 2;
+    public static final int STATUS_CONSULT = 2;
     public static final int STATUS_OPERATION = 3;
 
     /**
      * Stretcher status constants
      */
-    public static final int STATUS_TRIP = 4;
+    public static final int STATUS_TRIPPING = 4;
 
     /** Employee name field */
     private String name;

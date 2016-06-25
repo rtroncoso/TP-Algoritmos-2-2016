@@ -1,8 +1,12 @@
 package com.cst.systems;
 
+import com.cst.events.TripStarted;
+import com.cst.events.listeners.TripStartedListener;
 import com.cst.exceptions.NoStretcherAvailableException;
 import com.cst.model.clinic.Clinic;
 import com.cst.model.clinic.Trip;
+import com.cst.model.employee.Employee;
+import com.cst.model.employee.Stretcher;
 import com.cst.model.patient.Patient;
 
 import java.util.ArrayList;
@@ -13,7 +17,7 @@ import java.util.List;
  * SATSystem class - translation: "Sistema de Atención Telefónica"
  * @package com.cst.systems;
  */
-public class SATSystem {
+public class SATSystem implements TripStartedListener {
 
     /** Clinic associated to this SAT */
     private Clinic clinic;
@@ -34,9 +38,21 @@ public class SATSystem {
      * @param patients
      */
     public void startTrip(int distance, ArrayList<Patient> patients) throws NoStretcherAvailableException {
-        // TODO : Implement start trip event and other weeds
-        Trip trip = new Trip(distance, this.clinic.getFreeStretcher(), patients);
+        Stretcher stretcher = this.clinic.getFreeStretcher();
+        Trip trip = new Trip(distance, stretcher, patients);
+        this.clinic.getDispatcher().notify(new TripStarted(trip, stretcher));
         this.trips.add(trip);
+    }
+
+    /**
+     * Event applied when a trip gets started
+     * @param trip
+     */
+    public void onTripStarted(Trip trip, Stretcher stretcher) {
+        // TODO : Implement RTES (Real Time Emergency System) and start
+        //        to count the distance travelled by the stretcher
+        stretcher.setStatus(Employee.STATUS_TRIPPING);
+        trip.setStatus(Trip.STATUS_ON_ROUTE);
     }
 
     /**
