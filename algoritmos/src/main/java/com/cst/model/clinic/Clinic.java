@@ -8,7 +8,6 @@ import java.util.List;
 
 /**
  * Clinic class - Base container model
- *
  * @packaage com.cst.model
  */
 public class Clinic {

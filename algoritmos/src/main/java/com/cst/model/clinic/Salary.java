@@ -6,11 +6,11 @@ import java.text.DecimalFormat;
 
 /**
  * Salary class
- *
  * @package com.cst.model
  */
 public class Salary {
 
+    /** Employee to which this salary is assigned to */
     Employee employee;
 
     /**
@@ -25,7 +25,7 @@ public class Salary {
      * Obtains the Salary in a prettified format
      * @return
      */
-    public String getSalaryAsString(){
+    public String getSalaryAsString() {
         Double salary = employee.getSalary();
         String prettyString = "$";
         prettyString += new DecimalFormat("#.##").format(salary);

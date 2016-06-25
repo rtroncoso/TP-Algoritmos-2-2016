@@ -4,7 +4,6 @@ import java.util.Date;
 
 /**
  * Patient class
- *
  * @package com.cst
  */
 public class Patient {

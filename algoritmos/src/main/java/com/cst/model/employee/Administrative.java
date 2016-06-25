@@ -2,7 +2,6 @@ package com.cst.model.employee;
 
 /**
  * Administrative class
- *
  * @package com.cst.model
  */
 public class Administrative extends Employee {

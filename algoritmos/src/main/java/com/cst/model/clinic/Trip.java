@@ -4,7 +4,6 @@ import com.cst.model.employee.Stretcher;
 
 /**
  * Trip class
- *
  * @package com.cst.model
  */
 public class Trip {
