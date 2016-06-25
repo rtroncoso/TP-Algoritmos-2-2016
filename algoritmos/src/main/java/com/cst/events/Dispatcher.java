@@ -21,11 +21,11 @@ public final class Dispatcher {
      * @param listener
      * @param <L>
      */
-    public <L> void listen( Class<? extends Event<L>> evtClass, L listener) {
-        final ArrayList<L> listeners = listenersOf( evtClass );
-        synchronized( listeners ) {
-            if ( !listeners.contains( listener ) ) {
-                listeners.add( listener );
+    public <L> void listen(Class<? extends Event<L>> evtClass, L listener) {
+        final ArrayList<L> listeners = listenersOf(evtClass);
+        synchronized(listeners) {
+            if ( ! listeners.contains(listener)) {
+                listeners.add(listener);
             }
         }
     }
@@ -36,9 +36,9 @@ public final class Dispatcher {
      * @param listener
      * @param <L>
      */
-    public <L> void mute( Class<? extends Event<L>> evtClass, L listener) {
-        final ArrayList<L> listeners = listenersOf( evtClass );
-        synchronized( listeners ) {
+    public <L> void mute(Class<? extends Event<L>> evtClass, L listener) {
+        final ArrayList<L> listeners = listenersOf(evtClass);
+        synchronized(listeners) {
             listeners.remove( listener );
         }
     }
@@ -52,7 +52,7 @@ public final class Dispatcher {
     private <L> ArrayList<L> listenersOf(Class<? extends Event<L>> evtClass) {
         synchronized ( map ) {
             @SuppressWarnings("unchecked")
-            final ArrayList<L> existing = map.get( evtClass );
+            final ArrayList<L> existing = map.get(evtClass);
             if (existing != null) {
                 return existing;
             }
@@ -69,11 +69,11 @@ public final class Dispatcher {
      * @param evt
      * @param <L>
      */
-    public <L> void notify( final Event<L> evt) {
+    public <L> void notify(final Event<L> evt) {
         @SuppressWarnings("unchecked")
         Class<Event<L>> evtClass = (Class<Event<L>>) evt.getClass();
 
-        for ( L listener : listenersOf( evtClass ) ) {
+        for (L listener : listenersOf(evtClass)) {
             evt.notify(listener);
         }
     }

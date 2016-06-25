@@ -54,8 +54,7 @@ public class Trip {
      * @return Trip
      */
     public Trip travel(int distance) {
-        // TODO : Implement travel method and supply a travel
-        //        event for every kilometer carried on the trip
+        // TODO : Supply a travel event for every kilometer carried on the trip
         this.distance += distance;
         return this;
     }
