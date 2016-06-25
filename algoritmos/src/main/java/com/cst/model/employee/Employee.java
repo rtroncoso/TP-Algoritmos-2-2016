@@ -26,7 +26,10 @@ public abstract class Employee {
     /** Employee name field */
     private String name;
 
-    /** Employee salary field. Base monthly-paid salary. */
+    /** Employee baseSalary field. Base monthly-paid salary. */
+    private Double baseSalary;
+
+    /** Current employee salary accumulator */
     private Double salary;
 
     /** Employee status */
@@ -36,11 +39,11 @@ public abstract class Employee {
      * Employee constructor - Must be implemented
      *
      * @param name
-     * @param salary
+     * @param baseSalary
      */
-    public Employee(String name, Double salary) {
+    public Employee(String name, Double baseSalary) {
         this.status = Employee.STATUS_WAITING;
-        this.salary = salary;
+        this.baseSalary = baseSalary;
         this.name = name;
     }
 
@@ -53,11 +56,19 @@ public abstract class Employee {
     }
 
     /**
-     * Employee salary getter
+     * Employee baseSalary getter
      * @return String
      */
-    public Double getSalary() {
-        return salary;
+    public Double getBaseSalary() {
+        return baseSalary;
+    }
+
+    /**
+     * Employee baseSalary setter
+     * @param salary
+     */
+    public void setBaseSalary(Double salary) {
+        this.salary = salary;
     }
 
     /**
@@ -74,6 +85,30 @@ public abstract class Employee {
      */
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    /**
+     * Gets employee current salary
+     * @return Double
+     */
+    public Double getSalary() {
+        return salary;
+    }
+
+    /**
+     * Sets employee current salary
+     * @param salary
+     */
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
+
+    /**
+     * Adds a given salary amount to an employee
+     * @param salary
+     */
+    public void addSalary(Double salary) {
+        this.salary += salary;
     }
 
 }

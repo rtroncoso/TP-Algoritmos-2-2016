@@ -1,7 +1,9 @@
 package com.cst.model.clinic;
 
+import com.cst.exceptions.NoStretcherAvailableException;
 import com.cst.model.employee.Administrative;
 import com.cst.model.employee.Doctor;
+import com.cst.model.employee.Employee;
 import com.cst.model.employee.Stretcher;
 
 import java.util.ArrayList;
@@ -41,6 +43,20 @@ public class Clinic {
     public Clinic addDoctor(Doctor doctor) {
         this.doctors.add(doctor);
         return this;
+    }
+
+    /**
+     * Obtains a free stretcher from the stretchers pool
+     * @return Stretcher
+     */
+    public Stretcher getFreeStretcher() throws NoStretcherAvailableException {
+        for(Stretcher stretcher : this.stretchers) {
+            if(stretcher.getStatus() == Employee.STATUS_WAITING) {
+                return stretcher;
+            }
+        }
+
+        throw new NoStretcherAvailableException();
     }
 
     /**
