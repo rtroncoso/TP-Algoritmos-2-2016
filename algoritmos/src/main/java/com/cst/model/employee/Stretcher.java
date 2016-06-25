@@ -1,4 +1,6 @@
-package com.cst.model;
+package com.cst.model.employee;
+
+import com.cst.model.employee.Employee;
 
 /**
  * Stretcher class - Translation: "Camillero"

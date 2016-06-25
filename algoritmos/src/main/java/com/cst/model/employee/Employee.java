@@ -1,4 +1,4 @@
-package com.cst.model;
+package com.cst.model.employee;
 
 /**
  * Employee class - Base abstract class
@@ -23,8 +23,13 @@ public abstract class Employee {
      */
     public static final int STATUS_TRIP = 4;
 
+    /** Employee name field */
     private String name;
+
+    /** Employee salary field. Base monthly-paid salary. */
     private Double salary;
+
+    /** Employee status */
     private int status;
 
     /**
@@ -34,9 +39,9 @@ public abstract class Employee {
      * @param salary
      */
     public Employee(String name, Double salary) {
-        this.name = name;
-        this.salary = salary;
         this.status = Employee.STATUS_WAITING;
+        this.salary = salary;
+        this.name = name;
     }
 
     /**

@@ -1,5 +1,7 @@
 package com.cst.model;
 
+import com.cst.model.employee.Employee;
+
 import java.text.DecimalFormat;
 
 /**

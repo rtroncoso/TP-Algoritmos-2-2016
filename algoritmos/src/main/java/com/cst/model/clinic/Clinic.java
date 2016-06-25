@@ -1,4 +1,7 @@
-package com.cst.model;
+package com.cst.model.clinic;
+
+import com.cst.model.Salary;
+import com.cst.model.employee.Doctor;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

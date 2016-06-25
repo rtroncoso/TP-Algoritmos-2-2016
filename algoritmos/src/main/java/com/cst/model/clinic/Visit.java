@@ -1,9 +1,12 @@
-package com.cst.model;
+package com.cst.model.clinic;
+
+import com.cst.model.Patient;
+import com.cst.model.employee.Doctor;
 
 /**
  * Created by rtroncoso on 6/25/16.
  */
-public class Visit {
+public abstract class Visit {
 
     private Doctor doctor;
     private Patient patient;

@@ -1,4 +1,6 @@
-package com.cst.model;
+package com.cst.model.clinic;
+
+import com.cst.model.employee.Stretcher;
 
 /**
  * Trip class
@@ -34,6 +36,9 @@ public class Trip {
         this.travelled = 0;
         this.distance = distance;
         this.stretcher = stretcher;
+
+        // Trips start on route by default
+        this.status = Trip.STATUS_ON_ROUTE;
     }
 
     /**

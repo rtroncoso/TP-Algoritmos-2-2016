@@ -1,4 +1,4 @@
-package com.cst.model;
+package com.cst.model.employee;
 
 /**
  * Administrative class

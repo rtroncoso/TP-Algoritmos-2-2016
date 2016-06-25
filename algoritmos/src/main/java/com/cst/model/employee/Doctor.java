@@ -1,4 +1,4 @@
-package com.cst.model;
+package com.cst.model.employee;
 
 /**
  * Created with IntelliJ IDEA by: alejandro

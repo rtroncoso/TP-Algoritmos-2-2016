@@ -15,7 +15,6 @@ public class Healthcare {
 
     /**
      * Healthcare class Constructor
-     *
      * @param discount
      * @param company
      */
