@@ -1,9 +1,8 @@
 package com.cst.model.employee;
 
 /**
- * Created with IntelliJ IDEA by: alejandro
- * Date: 24/06/16
- * Time: 11:23
+ * Doctor class
+ * @package com.cst.model.employee
  */
 public class Doctor extends Employee {
 

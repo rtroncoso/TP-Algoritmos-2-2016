@@ -1,4 +1,4 @@
-package com.cst.model;
+package com.cst.model.patient;
 
 /**
  * Healthcare class - Translation: "Obra Social"

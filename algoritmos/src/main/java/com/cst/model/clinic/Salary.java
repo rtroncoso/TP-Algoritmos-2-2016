@@ -1,4 +1,4 @@
-package com.cst.model;
+package com.cst.model.clinic;
 
 import com.cst.model.employee.Employee;
 

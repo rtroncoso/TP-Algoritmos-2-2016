@@ -1,4 +1,4 @@
-package com.cst.model;
+package com.cst.model.patient;
 
 import java.util.Date;
 

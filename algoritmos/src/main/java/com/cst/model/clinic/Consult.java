@@ -1,6 +1,6 @@
 package com.cst.model.clinic;
 
-import com.cst.model.Patient;
+import com.cst.model.patient.Patient;
 import com.cst.model.employee.Doctor;
 
 /**
