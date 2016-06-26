@@ -1,6 +1,5 @@
 package com.cst.model.patient;
 
-import java.util.Date;
 
 /**
  * Patient class
@@ -8,7 +7,7 @@ import java.util.Date;
 public class Patient {
 
     private String name;
-    private Date birthdate;
+    private int age;
     private Healthcare healthcare;
 
     /**
@@ -16,22 +15,22 @@ public class Patient {
      * Use this to instantiate Patients without healthcare
      *
      * @param name
-     * @param birthdate
+     * @param age
      */
-    public Patient(String name, Date birthdate) {
-        this(name, birthdate, null);
+    public Patient(String name, int age) {
+        this(name, age, null);
     }
 
     /**
      * Patient class constructor
      *
      * @param name
-     * @param birthdate
+     * @param age
      * @param healthcare
      */
-    public Patient(String name, Date birthdate, Healthcare healthcare) {
+    public Patient(String name, int age, Healthcare healthcare) {
         this.name = name;
-        this.birthdate = birthdate;
+        this.age = age;
         this.healthcare = healthcare;
     }
 
@@ -52,19 +51,19 @@ public class Patient {
     }
 
     /**
-     * Patient birthdate getter
-     * @return Date
+     * Patient age getter
+     * @return int
      */
-    public Date getBirthdate() {
-        return birthdate;
+    public int getAge() {
+        return age;
     }
 
     /**
-     * Patient birthdate setter
-     * @param birthdate
+     * Patient age setter
+     * @param age
      */
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     /**

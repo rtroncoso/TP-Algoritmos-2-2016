@@ -1,14 +1,16 @@
 package com.cst.model.clinic;
 
-import com.cst.events.Dispatcher;
-import com.cst.events.EmergencyCallDispatch;
-import com.cst.events.TripStarted;
+import com.cst.events.*;
+import com.cst.events.listeners.OperationStartedListener;
+import com.cst.events.listeners.TripFinishedListener;
+import com.cst.exceptions.NoAdministrativeAvailableException;
 import com.cst.exceptions.NoDoctorAvailableException;
 import com.cst.exceptions.NoStretcherAvailableException;
 import com.cst.model.employee.Administrative;
 import com.cst.model.employee.Doctor;
 import com.cst.model.employee.Employee;
 import com.cst.model.employee.Stretcher;
+import com.cst.model.patient.Patient;
 import com.cst.systems.SATSystem;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ import java.util.List;
 /**
  * Clinic class - Base container model
  */
-public class Clinic {
+public class Clinic implements TripFinishedListener, OperationStartedListener {
 
     /** List of doctors assigned to the clinic */
     private List<Doctor> doctors;
@@ -28,6 +30,9 @@ public class Clinic {
 
     /** List of stretchers assigned to the clinic */
     private List<Stretcher> stretchers;
+
+    /** List of operations performed by the clinic */
+    private List<Operation> operations;
 
     /** Clinics will handle their own event dispatchers */
     private Dispatcher dispatcher;
@@ -45,6 +50,31 @@ public class Clinic {
         this.dispatcher = new Dispatcher();
         this.satSystem = new SATSystem(this);
         this.dispatcher.listen(TripStarted.class, this.satSystem);
+        this.dispatcher.listen(TripFinished.class, this);
+    }
+
+    /**
+     * Event fired when a trip gets finished
+     * @param trip
+     */
+    public void onTripFinished(Trip trip) throws NoDoctorAvailableException {
+        for(Patient patient : trip.getPatients()) {
+            Doctor doctor = this.getFreeDoctor();
+            Operation operation = new Operation(doctor, patient);
+
+            this.operations.add(operation);
+            this.dispatcher.notify(new OperationStarted(operation));
+        }
+    }
+
+    /**
+     * Operation started event listener
+     * @param operation
+     */
+    public void onOperationStarted(Operation operation) {
+        operation.setStatus(Visit.STATUS_IN_PROGRESS);
+        operation.getDoctor().addSalary(operation);
+        operation.perform();
     }
 
     /**
@@ -66,6 +96,20 @@ public class Clinic {
         this.dispatcher.listen(EmergencyCallDispatch.class, stretcher);
         this.stretchers.add(stretcher);
         return this;
+    }
+
+    /**
+     * Obtains a free stretcher from the stretchers pool
+     * @return Administrative
+     */
+    public Administrative getFreeAdministrativeEmployee() throws NoAdministrativeAvailableException {
+        for(Administrative administrative : this.administratives) {
+            if(administrative.getStatus() == Employee.STATUS_WAITING) {
+                return administrative;
+            }
+        }
+
+        throw new NoAdministrativeAvailableException();
     }
 
     /**

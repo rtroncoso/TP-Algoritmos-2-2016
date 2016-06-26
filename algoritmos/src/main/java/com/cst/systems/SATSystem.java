@@ -52,9 +52,9 @@ public class SATSystem implements TripStartedListener {
             throw new CallAlreadyDispatched();
         }
 
-        Trip trip = new Trip(distance, patients);
-        this.status = SATSystem.STATUS_DISPATCHED;
+        Trip trip = new Trip(distance, patients, this.clinic);
         this.clinic.getDispatcher().notify(new EmergencyCallDispatch(trip));
+        this.status = SATSystem.STATUS_DISPATCHED;
     }
 
     /**

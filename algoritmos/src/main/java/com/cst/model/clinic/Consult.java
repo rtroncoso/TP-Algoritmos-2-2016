@@ -18,4 +18,11 @@ public class Consult extends Visit {
         super(doctor, patient);
     }
 
+    /**
+     * Performs a clinical consult on a patient
+     */
+    public void perform() {
+
+    }
+
 }

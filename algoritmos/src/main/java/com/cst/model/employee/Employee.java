@@ -1,5 +1,7 @@
 package com.cst.model.employee;
 
+import com.cst.model.clinic.Clinic;
+
 /**
  * Employee class - Base abstract class
  */
@@ -29,16 +31,20 @@ public abstract class Employee {
     /** Employee status */
     protected int status;
 
+    /** Reference to this employee's clinic */
+    protected Clinic clinic;
+
     /**
      * Employee constructor - Must be implemented
      *
      * @param name
      * @param baseSalary
      */
-    public Employee(String name, double baseSalary) {
+    public Employee(String name, double baseSalary, Clinic clinic) {
         this.status = Employee.STATUS_WAITING;
         this.baseSalary = baseSalary;
         this.name = name;
+        this.clinic = clinic;
     }
 
     /**
@@ -95,6 +101,22 @@ public abstract class Employee {
      */
     public void setSalary(double salary) {
         this.salary = salary;
+    }
+
+    /**
+     * Obtains this employee's associated clinic
+     * @return Clinic
+     */
+    public Clinic getClinic() {
+        return this.clinic;
+    }
+
+    /**
+     * Sets this employee's associated clinic
+     * @param clinic
+     */
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 
     /**

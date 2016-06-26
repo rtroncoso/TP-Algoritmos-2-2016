@@ -39,7 +39,7 @@ public class Stretcher extends Employee implements EmergencyCallDispatchListener
      * @param clinic
      */
     public Stretcher(String name, double salary, Clinic clinic) {
-        super(name, salary);
+        super(name, salary, clinic);
         this.clinic = clinic;
         this.trips = new ArrayList<Trip>();
     }

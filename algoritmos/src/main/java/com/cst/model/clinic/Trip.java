@@ -1,6 +1,7 @@
 package com.cst.model.clinic;
 
 import com.cst.events.DistanceTravelled;
+import com.cst.events.TripFinished;
 import com.cst.events.listeners.DistanceTravelledListener;
 import com.cst.model.employee.Employee;
 import com.cst.model.employee.Stretcher;
@@ -52,8 +53,9 @@ public class Trip implements DistanceTravelledListener {
      * @param distance
      * @param patients
      */
-    public Trip(int distance, ArrayList<Patient> patients) {
-        this.clinic.getDispatcher().listen(DistanceTravelled.class, this);
+    public Trip(int distance, ArrayList<Patient> patients, Clinic clinic) {
+        clinic.getDispatcher().listen(DistanceTravelled.class, this);
+        this.clinic = clinic;
         this.distance = distance;
         this.patients = patients;
         this.travelled = 0;
@@ -64,8 +66,8 @@ public class Trip implements DistanceTravelledListener {
      * @param distance
      * @param patient
      */
-    public Trip(int distance, Patient patient) {
-        this(distance, new ArrayList<Patient>((Collection<? extends Patient>) patient));
+    public Trip(int distance, Patient patient, Clinic clinic) {
+        this(distance, new ArrayList<Patient>((Collection<? extends Patient>) patient), clinic);
     }
 
     /**
@@ -75,8 +77,9 @@ public class Trip implements DistanceTravelledListener {
     public void onDistanceTravelled(Trip trip) {
         if(trip != this) return; // dirty fix for global events
 
-        if(this.travelled == this.distance) {
+        if(this.travelled >= this.distance) {
             // TODO : Fire an event or start right away an operation through clinic object
+            this.clinic.getDispatcher().notify(new TripFinished(this));
             this.stretcher.setStatus(Employee.STATUS_WAITING);
             this.setStatus(Trip.STATUS_FINISHED);
             return;

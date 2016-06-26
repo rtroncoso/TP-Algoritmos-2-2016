@@ -18,4 +18,11 @@ public class Operation extends Visit {
         super(doctor, patient);
     }
 
+    /**
+     * Performs an operation on a patient
+     */
+    public void perform() {
+
+    }
+
 }
