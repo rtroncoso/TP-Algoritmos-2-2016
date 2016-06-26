@@ -1,6 +1,7 @@
 package com.cst.model.clinic;
 
 import com.cst.events.listeners.DistanceTravelledListener;
+import com.cst.model.employee.Employee;
 import com.cst.model.employee.Stretcher;
 import com.cst.model.patient.Patient;
 import com.cst.util.DateHelper;
@@ -71,6 +72,7 @@ public class Trip implements DistanceTravelledListener {
 
         if(this.travelled == this.distance) {
             // TODO : Fire an event or start right away an operation through clinic object
+            this.stretcher.setStatus(Employee.STATUS_WAITING);
             this.setStatus(Trip.STATUS_FINISHED);
             return;
         }
