@@ -1,16 +1,19 @@
 package com.cst.model.clinic;
 
+import com.cst.events.listeners.DistanceTravelledListener;
 import com.cst.model.employee.Stretcher;
 import com.cst.model.patient.Patient;
+import com.cst.util.DateHelper;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Calendar;
 import java.util.List;
 
 /**
  * Trip class
  */
-public class Trip {
+public class Trip implements DistanceTravelledListener {
 
     /** Status used when a trip is not yet dispatched */
     public final static int STATUS_WAITING = 1;
@@ -29,6 +32,9 @@ public class Trip {
 
     /** Status of the trip */
     private int status;
+
+    /** Calendar when this trip got started */
+    private Calendar date;
 
     /** Stretcher that carries on the trip */
     private Stretcher stretcher;
@@ -57,22 +63,22 @@ public class Trip {
     }
 
     /**
-     * Default distance traveller (increments travelled distance by 1)
-     * @return Trip
+     * Event fired when the trip gets distance travelled (1 kilometer)
+     * @param trip
      */
-    public Trip travel() {
-        return this.travel(1);
-    }
+    public void onDistanceTravelled(Trip trip) {
+        if(trip != this) return; // dirty fix for global events
 
-    /**
-     * Performs the travel of a trip incrementing the distance travelled
-     * @param distance
-     * @return Trip
-     */
-    public Trip travel(int distance) {
-        // TODO : Supply a travel event for every kilometer carried on the trip
-        this.travelled += travelled;
-        return this;
+        if(this.travelled == this.distance) {
+            // TODO : Fire an event or start right away an operation through clinic object
+            this.setStatus(Trip.STATUS_FINISHED);
+            return;
+        }
+
+        this.getStretcher().addSalary(DateHelper.isWeekend(this.date) ?
+                Stretcher.DISTANCE_TRAVELLED_SALARY * 2 :
+                Stretcher.DISTANCE_TRAVELLED_SALARY);
+        this.travelled += 1;
     }
 
     /**
@@ -121,6 +127,38 @@ public class Trip {
      */
     public void setStretcher(Stretcher stretcher) {
         this.stretcher = stretcher;
+    }
+
+    /**
+     * Obtains the list of patients for this trip
+     * @return List
+     */
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    /**
+     * Sets the list of patients for this trip
+     * @param patients
+     */
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
+    }
+
+    /**
+     * Obtains this trip starting date
+     * @return Calendar
+     */
+    public Calendar getDate() {
+        return date;
+    }
+
+    /**
+     * Sets this trip starting date
+     * @param date
+     */
+    public void setDate(Calendar date) {
+        this.date = date;
     }
 
 }

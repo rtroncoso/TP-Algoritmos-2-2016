@@ -4,6 +4,7 @@ import com.cst.events.TripStarted;
 import com.cst.events.listeners.EmergencyCallDispatchListener;
 import com.cst.model.clinic.Clinic;
 import com.cst.model.clinic.Trip;
+import com.cst.util.DateHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,16 @@ public class Stretcher extends Employee implements EmergencyCallDispatchListener
     public void onEmergencyCallDispatch(Trip trip) {
         if(trip.getStatus() == Trip.STATUS_WAITING &&
            this.status == Employee.STATUS_WAITING) {
-            this.addSalary(Stretcher.BASE_PICKUP_SALARY);
+            this.addSalary(DateHelper.isWeekend(trip.getDate()) ?
+                    Stretcher.BASE_PICKUP_SALARY * 2:
+                    Stretcher.BASE_PICKUP_SALARY);
+
+            if(trip.getPatients().size() > 1) {
+                this.addSalary(DateHelper.isWeekend(trip.getDate()) ?
+                        trip.getPatients().size() * Stretcher.ADDITIONAL_PERSON_SALARY * 2:
+                        trip.getPatients().size() * Stretcher.ADDITIONAL_PERSON_SALARY);
+            }
+
             this.setStatus(Employee.STATUS_TRIPPING);
             trip.setStatus(Trip.STATUS_ON_ROUTE);
             trip.setStretcher(this);
