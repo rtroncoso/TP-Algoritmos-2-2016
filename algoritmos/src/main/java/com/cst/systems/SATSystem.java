@@ -1,11 +1,10 @@
 package com.cst.systems;
 
-import com.cst.events.TripStarted;
+import com.cst.events.EmergencyCallDispatch;
 import com.cst.events.listeners.TripStartedListener;
-import com.cst.exceptions.NoStretcherAvailableException;
+import com.cst.exceptions.CallAlreadyDispatched;
 import com.cst.model.clinic.Clinic;
 import com.cst.model.clinic.Trip;
-import com.cst.model.employee.Employee;
 import com.cst.model.employee.Stretcher;
 import com.cst.model.patient.Patient;
 
@@ -15,15 +14,23 @@ import java.util.List;
 
 /**
  * SATSystem class - translation: "Sistema de Atención Telefónica"
- * @package com.cst.systems;
  */
 public class SATSystem implements TripStartedListener {
+
+    /** Status for the SATSystem on hold */
+    public static final int STATUS_WAITING = 1;
+
+    /** Status when a call gets dispatched */
+    public static final int STATUS_DISPATCHED = 2;
 
     /** Clinic associated to this SAT */
     private Clinic clinic;
 
     /** List of trips registered in the SAT */
     private List<Trip> trips;
+
+    /** Current SATSystem status */
+    private int status;
 
     /**
      * SAT System class constructor
@@ -34,14 +41,31 @@ public class SATSystem implements TripStartedListener {
     }
 
     /**
-     * Starts a trip using the SATSystem
+     * Starts an emergency using the SAT System
+     * with a given distance and patients
+     * @param distance
      * @param patients
      */
-    public void startTrip(int distance, ArrayList<Patient> patients) throws NoStretcherAvailableException {
-        Stretcher stretcher = this.clinic.getFreeStretcher();
-        Trip trip = new Trip(distance, stretcher, patients);
-        this.clinic.getDispatcher().notify(new TripStarted(trip, stretcher));
-        this.trips.add(trip);
+    public void startEmergency(int distance, ArrayList<Patient> patients)
+            throws CallAlreadyDispatched {
+        if(this.status == SATSystem.STATUS_DISPATCHED) {
+            throw new CallAlreadyDispatched();
+        }
+
+        Trip trip = new Trip(distance, patients);
+        this.status = SATSystem.STATUS_DISPATCHED;
+        this.clinic.getDispatcher().notify(new EmergencyCallDispatch(trip));
+    }
+
+    /**
+     * Starts an emergency using the SAT System
+     * with a given distance and patients
+     * @param distance
+     * @param patient
+     */
+    public void startEmergency(int distance, Patient patient)
+            throws CallAlreadyDispatched {
+        this.startEmergency(distance, new ArrayList<Patient>((Collection<? extends Patient>) patient));
     }
 
     /**
@@ -51,17 +75,7 @@ public class SATSystem implements TripStartedListener {
     public void onTripStarted(Trip trip, Stretcher stretcher) {
         // TODO : Implement RTES (Real Time Emergency System) and start
         //        to count the distance travelled by the stretcher
-        stretcher.setStatus(Employee.STATUS_TRIPPING);
-        trip.setStatus(Trip.STATUS_ON_ROUTE);
-    }
-
-    /**
-     * Starts a trip using the SATSystem.
-     * Constructor for a one-patient trip.
-     * @param patient
-     */
-    public void startTrip(int distance, Patient patient) throws NoStretcherAvailableException {
-        this.startTrip(distance, new ArrayList<Patient>((Collection<? extends Patient>) patient));
+        this.status = SATSystem.STATUS_WAITING;
     }
 
     /**

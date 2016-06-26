@@ -13,6 +13,6 @@ public interface TripStartedListener {
      * Method fire when a trip gets started
      * @param trip
      */
-    public void onTripStarted(Trip trip, Stretcher stretcher);
+    void onTripStarted(Trip trip, Stretcher stretcher);
 
 }

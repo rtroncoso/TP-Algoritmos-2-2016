@@ -2,7 +2,6 @@ package com.cst.model.patient;
 
 /**
  * Healthcare class - Translation: "Obra Social"
- * @package com.cst.model
  */
 public class Healthcare {
 

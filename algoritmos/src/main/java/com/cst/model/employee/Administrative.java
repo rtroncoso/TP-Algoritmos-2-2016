@@ -2,7 +2,6 @@ package com.cst.model.employee;
 
 /**
  * Administrative class
- * @package com.cst.model
  */
 public class Administrative extends Employee {
 
@@ -12,7 +11,7 @@ public class Administrative extends Employee {
      * @param name
      * @param salary
      */
-    public Administrative(String name, Double salary) {
+    public Administrative(String name, double salary) {
         super(name, salary);
     }
 

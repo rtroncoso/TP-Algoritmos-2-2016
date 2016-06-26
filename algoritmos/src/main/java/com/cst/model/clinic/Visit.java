@@ -4,7 +4,7 @@ import com.cst.model.patient.Patient;
 import com.cst.model.employee.Doctor;
 
 /**
- * Created by rtroncoso on 6/25/16.
+ * Visit class
  */
 public abstract class Visit {
 

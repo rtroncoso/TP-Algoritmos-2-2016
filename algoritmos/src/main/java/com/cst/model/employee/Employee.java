@@ -24,16 +24,16 @@ public abstract class Employee {
     public static final int STATUS_TRIPPING = 4;
 
     /** Employee name field */
-    private String name;
+    protected String name;
 
     /** Employee baseSalary field. Base monthly-paid salary. */
-    private Double baseSalary;
+    protected double baseSalary;
 
     /** Current employee salary accumulator */
-    private Double salary;
+    protected double salary;
 
     /** Employee status */
-    private int status;
+    protected int status;
 
     /**
      * Employee constructor - Must be implemented
@@ -41,7 +41,7 @@ public abstract class Employee {
      * @param name
      * @param baseSalary
      */
-    public Employee(String name, Double baseSalary) {
+    public Employee(String name, double baseSalary) {
         this.status = Employee.STATUS_WAITING;
         this.baseSalary = baseSalary;
         this.name = name;
@@ -59,7 +59,7 @@ public abstract class Employee {
      * Employee baseSalary getter
      * @return String
      */
-    public Double getBaseSalary() {
+    public double getBaseSalary() {
         return baseSalary;
     }
 
@@ -67,7 +67,7 @@ public abstract class Employee {
      * Employee baseSalary setter
      * @param salary
      */
-    public void setBaseSalary(Double salary) {
+    public void setBaseSalary(double salary) {
         this.salary = salary;
     }
 
@@ -89,9 +89,9 @@ public abstract class Employee {
 
     /**
      * Gets employee current salary
-     * @return Double
+     * @return double
      */
-    public Double getSalary() {
+    public double getSalary() {
         return salary;
     }
 
@@ -99,7 +99,7 @@ public abstract class Employee {
      * Sets employee current salary
      * @param salary
      */
-    public void setSalary(Double salary) {
+    public void setSalary(double salary) {
         this.salary = salary;
     }
 
@@ -107,7 +107,7 @@ public abstract class Employee {
      * Adds a given salary amount to an employee
      * @param salary
      */
-    public void addSalary(Double salary) {
+    public void addSalary(double salary) {
         this.salary += salary;
     }
 

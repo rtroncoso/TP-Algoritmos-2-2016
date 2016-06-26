@@ -13,11 +13,14 @@ import java.util.List;
  */
 public class Trip {
 
+    /** Status used when a trip is not yet dispatched */
+    public final static int STATUS_WAITING = 1;
+
     /** Status used when stretcher is on route to clinic */
-    public final static int STATUS_ON_ROUTE = 1;
+    public final static int STATUS_ON_ROUTE = 2;
 
     /** Finished trip status */
-    public final static int STATUS_FINISHED = 2;
+    public final static int STATUS_FINISHED = 3;
 
     /** Distance from rescue point to clinic (kilometers) */
     private int distance;
@@ -39,9 +42,8 @@ public class Trip {
      * @param distance
      * @param stretcher
      */
-    public Trip(int distance, Stretcher stretcher, ArrayList<Patient> patients) {
+    public Trip(int distance, ArrayList<Patient> patients) {
         this.distance = distance;
-        this.stretcher = stretcher;
         this.patients = patients;
         this.travelled = 0;
     }
@@ -52,8 +54,8 @@ public class Trip {
      * @param stretcher
      * @param patient
      */
-    public Trip(int distance, Stretcher stretcher, Patient patient) {
-        this(distance, stretcher, new ArrayList<Patient>((Collection<? extends Patient>) patient));
+    public Trip(int distance, Patient patient) {
+        this(distance, new ArrayList<Patient>((Collection<? extends Patient>) patient));
     }
 
     /**
@@ -109,7 +111,7 @@ public class Trip {
 
     /**
      * Trip stretcher getter
-     * @return
+     * @return Stretcher
      */
     public Stretcher getStretcher() {
         return stretcher;

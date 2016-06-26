@@ -1,16 +1,26 @@
 package com.cst.model.employee;
 
+import com.cst.events.listeners.EmergencyCallDispatchListener;
+import com.cst.model.clinic.Clinic;
 import com.cst.model.clinic.Trip;
-import com.cst.model.employee.Employee;
+import com.cst.model.patient.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Stretcher class - Translation: "Camillero"
- * @package com.cst.model
  */
-public class Stretcher extends Employee {
+public class Stretcher extends Employee implements EmergencyCallDispatchListener {
+
+    /** Base salary for an emergency pickup */
+    public static final double BASE_PICKUP_SALARY = 20;
+
+    /** Salary to be added on each kilometer travelled */
+    public static final double DISTANCE_TRAVELLED_SALARY = 100;
+
+    /** Salary to be added for each person in the trip */
+    public static final double ADDITIONAL_PERSON_SALARY = 120;
 
     /** List of finished trips done by the stretcher */
     private List<Trip> trips;
@@ -18,15 +28,33 @@ public class Stretcher extends Employee {
     /** Current trip being carried by the stretcher */
     private Trip currentTrip;
 
+    /** Clinic associated with this stretcher */
+    private Clinic clinic;
+
     /**
      * Stretcher class constructor
-     *
      * @param name
      * @param salary
+     * @param clinic
      */
-    public Stretcher(String name, Double salary) {
+    public Stretcher(String name, double salary, Clinic clinic) {
         super(name, salary);
+        this.clinic = clinic;
         this.trips = new ArrayList<Trip>();
+    }
+
+    /**
+     * Called when an emergency gets dispatched
+     * @param trip
+     */
+    public void onEmergencyCallDispatch(Trip trip) {
+        if(trip.getStatus() == Trip.STATUS_WAITING &&
+           this.status == Employee.STATUS_WAITING) {
+            this.addSalary(Stretcher.BASE_PICKUP_SALARY);
+            this.setStatus(Employee.STATUS_TRIPPING);
+            trip.setStatus(Trip.STATUS_ON_ROUTE);
+            trip.setStretcher(this);
+        }
     }
 
     /**
@@ -59,6 +87,22 @@ public class Stretcher extends Employee {
      */
     public void setCurrentTrip(Trip currentTrip) {
         this.currentTrip = currentTrip;
+    }
+
+    /**
+     * Stretcher clinic getter
+     * @return Clinic
+     */
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    /**
+     * Stretcher clinic setter
+     * @param clinic
+     */
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 
 }

@@ -6,7 +6,7 @@ package com.cst.model.employee;
  */
 public class Doctor extends Employee {
 
-    public Doctor(String name, Double salary){
+    public Doctor(String name, double salary){
         super(name, salary);
     }
 
