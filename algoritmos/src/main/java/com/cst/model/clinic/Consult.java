@@ -5,7 +5,6 @@ import com.cst.model.employee.Doctor;
 
 /**
  * Clinical Consult class - Translation: "Consulta Médica"
- * @package com.cst.model.clinic
  */
 public class Consult extends Visit {
 

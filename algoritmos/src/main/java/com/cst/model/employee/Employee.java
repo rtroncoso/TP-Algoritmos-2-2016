@@ -2,8 +2,6 @@ package com.cst.model.employee;
 
 /**
  * Employee class - Base abstract class
- *
- * @package com.cst.model
  */
 public abstract class Employee {
 

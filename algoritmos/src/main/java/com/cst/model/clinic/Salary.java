@@ -6,7 +6,6 @@ import java.text.DecimalFormat;
 
 /**
  * Salary class
- * @package com.cst.model
  */
 public class Salary {
 

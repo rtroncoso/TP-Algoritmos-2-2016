@@ -60,7 +60,7 @@ public class Stretcher extends Employee implements EmergencyCallDispatchListener
 
     /**
      * Obtains all finished trips from the stretcher
-     * @return List<Trip>
+     * @return List
      */
     public List<Trip> getTrips() {
         return trips;

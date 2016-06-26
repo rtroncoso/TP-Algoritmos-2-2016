@@ -7,7 +7,6 @@ import com.cst.model.employee.Stretcher;
 
 /**
  * TripStarted class
- * @package com.cst.events
  */
 public class TripStarted implements Event<TripStartedListener> {
 

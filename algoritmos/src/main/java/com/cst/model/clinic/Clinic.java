@@ -17,7 +17,6 @@ import java.util.List;
 
 /**
  * Clinic class - Base container model
- * @packaage com.cst.model
  */
 public class Clinic {
 
@@ -61,7 +60,7 @@ public class Clinic {
     /**
      * Adds a new stretcher to the clinic
      * @param stretcher
-     * @return
+     * @return Clinic
      */
     public Clinic addStretcher(Stretcher stretcher) {
         this.dispatcher.listen(EmergencyCallDispatch.class, stretcher);
@@ -85,7 +84,7 @@ public class Clinic {
 
     /**
      * Obtains all the free stretchers from the stretcher pool
-     * @return ArrayList<Stretcher>
+     * @return ArrayList
      */
     public ArrayList<Stretcher> getFreeStretchers() throws NoStretcherAvailableException {
         ArrayList<Stretcher> free = new ArrayList<Stretcher>();
@@ -125,7 +124,7 @@ public class Clinic {
      *        the other employee salaries.
      *        (Punto 1 del tp)
      *
-     * @return List<Salary>
+     * @return List
      */
     public List<Salary> getSalaries() {
         List<Salary> salaries = new LinkedList<Salary>();

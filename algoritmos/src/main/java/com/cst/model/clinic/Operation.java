@@ -5,7 +5,6 @@ import com.cst.model.employee.Doctor;
 
 /**
  * Operation class
- * @package com.cst.model
  */
 public class Operation extends Visit {
 

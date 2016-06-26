@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * Trip class
- * @package com.cst.model
  */
 public class Trip {
 
@@ -40,7 +39,7 @@ public class Trip {
     /**
      * Trip class constructor
      * @param distance
-     * @param stretcher
+     * @param patients
      */
     public Trip(int distance, ArrayList<Patient> patients) {
         this.distance = distance;
@@ -51,7 +50,6 @@ public class Trip {
     /**
      * One-patient Trip class constructor
      * @param distance
-     * @param stretcher
      * @param patient
      */
     public Trip(int distance, Patient patient) {

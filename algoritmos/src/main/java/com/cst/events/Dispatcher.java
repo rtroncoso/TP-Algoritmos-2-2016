@@ -6,7 +6,6 @@ import java.util.HashMap;
 /**
  * Event dispatcher class
  *
- * @package com.cst.events
  */
 public final class Dispatcher {
 

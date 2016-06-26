@@ -5,7 +5,6 @@ import com.cst.model.employee.Stretcher;
 
 /**
  * TripStartedListener interface
- * @package com.cst.events.listeners
  */
 public interface TripStartedListener {
 

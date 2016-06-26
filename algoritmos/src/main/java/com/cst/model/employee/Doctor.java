@@ -2,7 +2,6 @@ package com.cst.model.employee;
 
 /**
  * Doctor class
- * @package com.cst.model.employee
  */
 public class Doctor extends Employee {
 
