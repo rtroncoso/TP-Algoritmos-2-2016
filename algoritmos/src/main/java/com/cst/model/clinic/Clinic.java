@@ -2,6 +2,7 @@ package com.cst.model.clinic;
 
 import com.cst.events.Dispatcher;
 import com.cst.events.EmergencyCallDispatch;
+import com.cst.events.TripStarted;
 import com.cst.exceptions.NoDoctorAvailableException;
 import com.cst.exceptions.NoStretcherAvailableException;
 import com.cst.model.employee.Administrative;
@@ -44,6 +45,7 @@ public class Clinic {
         this.stretchers = new ArrayList<Stretcher>();
         this.dispatcher = new Dispatcher();
         this.satSystem = new SATSystem(this);
+        this.dispatcher.listen(TripStarted.class, this.satSystem);
     }
 
     /**

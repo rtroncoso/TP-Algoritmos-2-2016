@@ -1,9 +1,9 @@
 package com.cst.model.employee;
 
+import com.cst.events.TripStarted;
 import com.cst.events.listeners.EmergencyCallDispatchListener;
 import com.cst.model.clinic.Clinic;
 import com.cst.model.clinic.Trip;
-import com.cst.model.patient.Patient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +54,7 @@ public class Stretcher extends Employee implements EmergencyCallDispatchListener
             this.setStatus(Employee.STATUS_TRIPPING);
             trip.setStatus(Trip.STATUS_ON_ROUTE);
             trip.setStretcher(this);
+            this.clinic.getDispatcher().notify(new TripStarted(trip, this));
         }
     }
 
