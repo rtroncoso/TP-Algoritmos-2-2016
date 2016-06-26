@@ -1,5 +1,6 @@
 package com.cst.model.clinic;
 
+import com.cst.events.DistanceTravelled;
 import com.cst.events.listeners.DistanceTravelledListener;
 import com.cst.model.employee.Employee;
 import com.cst.model.employee.Stretcher;
@@ -43,12 +44,16 @@ public class Trip implements DistanceTravelledListener {
     /** List of patients to be picked up */
     private List<Patient> patients;
 
+    /** Local reference of this trip's clinic */
+    private Clinic clinic;
+
     /**
      * Trip class constructor
      * @param distance
      * @param patients
      */
     public Trip(int distance, ArrayList<Patient> patients) {
+        this.clinic.getDispatcher().listen(DistanceTravelled.class, this);
         this.distance = distance;
         this.patients = patients;
         this.travelled = 0;
@@ -161,6 +166,22 @@ public class Trip implements DistanceTravelledListener {
      */
     public void setDate(Calendar date) {
         this.date = date;
+    }
+
+    /**
+     * Trip clinic getter
+     * @return Clinic
+     */
+    public Clinic getClinic() {
+        return clinic;
+    }
+
+    /**
+     * Trip clinic setter
+     * @param clinic
+     */
+    public void setClinic(Clinic clinic) {
+        this.clinic = clinic;
     }
 
 }

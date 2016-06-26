@@ -5,20 +5,16 @@ package com.cst.model.employee;
  */
 public abstract class Employee {
 
-    /**
-     * Global status constants
-     */
+    /** Status for waiting for duty employees */
     public static final int STATUS_WAITING = 1;
 
-    /**
-     * Doctors status constants
-     */
+    /** Status used when a doctor is on a consult */
     public static final int STATUS_CONSULT = 2;
+
+    /** Status used for when a doctor is in an operation */
     public static final int STATUS_OPERATION = 3;
 
-    /**
-     * Stretcher status constants
-     */
+    /** Status when a stretcher is tripping (no pun intended) */
     public static final int STATUS_TRIPPING = 4;
 
     /** Employee name field */
