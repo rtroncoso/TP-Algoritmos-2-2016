@@ -3,6 +3,7 @@ package com.cst.view;
 import com.cst.util.KeyboardListener;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created with IntelliJ IDEA by: alejandro
@@ -28,5 +29,9 @@ public class Menu extends KeyboardListener {
     protected void clearScreen(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    protected void clearInput(){
+        (new Scanner(System.in)).nextLine();
     }
 }
