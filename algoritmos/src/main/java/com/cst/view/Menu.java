@@ -16,6 +16,7 @@ public class Menu extends KeyboardListener {
     protected ArrayList<String> options;
 
     protected void listOptions(){
+        clearScreen();
         System.out.println("#####################");
         System.out.println("    " + title);
         System.out.println("#####################");
@@ -33,5 +34,9 @@ public class Menu extends KeyboardListener {
 
     protected void clearInput(){
         (new Scanner(System.in)).nextLine();
+    }
+
+    protected void invalidOption(){
+        System.out.println("Opción incorrecta.");
     }
 }

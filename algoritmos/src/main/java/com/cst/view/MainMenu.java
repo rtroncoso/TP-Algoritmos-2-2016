@@ -29,7 +29,9 @@ public class MainMenu extends Menu {
             case '2': loadPatientsMenu();
             case '3': loadAmbulanceMenu();
             case '4': quit();
+            default: invalidOption();
         }
+//        clearInput();
     }
 
     private void loadPersonnelMenu(){
