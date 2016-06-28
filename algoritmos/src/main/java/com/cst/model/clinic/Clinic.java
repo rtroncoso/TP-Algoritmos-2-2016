@@ -12,6 +12,7 @@ import com.cst.model.employee.Employee;
 import com.cst.model.employee.Stretcher;
 import com.cst.model.patient.Patient;
 import com.cst.systems.SATSystem;
+import com.cst.util.JoinList;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -73,7 +74,7 @@ public class Clinic implements TripFinishedListener, OperationStartedListener {
      */
     public void onOperationStarted(Operation operation) {
         operation.setStatus(Visit.STATUS_IN_PROGRESS);
-        operation.getDoctor().addSalary(operation);
+        operation.getDoctor().addSalary(operation, this);
         operation.perform();
     }
 
@@ -161,24 +162,6 @@ public class Clinic implements TripFinishedListener, OperationStartedListener {
     }
 
     /**
-     * Obtains a list of all the doctor salaries
-     * TODO : Move this logic into a separate class,
-     *        as it should be able to calculate all
-     *        the stretcher salaries as long with
-     *        the other employee salaries.
-     *        (Punto 1 del tp)
-     *
-     * @return List
-     */
-    public List<Salary> getSalaries() {
-        List<Salary> salaries = new LinkedList<Salary>();
-        for (Doctor doctor : doctors) {
-            salaries.add(new Salary(doctor));
-        }
-        return salaries;
-    }
-
-    /**
      * Clinic dispatcher getter
      * @return Dispatcher
      */
@@ -208,6 +191,10 @@ public class Clinic implements TripFinishedListener, OperationStartedListener {
      */
     public void setSatSystem(SATSystem satSystem) {
         this.satSystem = satSystem;
+    }
+
+    public List<Employee> getEmployees(){
+        return new JoinList<Employee>(new JoinList<Employee>(this.doctors, this.stretchers), this.administratives);
     }
 
 }

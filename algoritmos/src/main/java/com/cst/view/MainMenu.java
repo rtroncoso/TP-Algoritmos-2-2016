@@ -23,19 +23,19 @@ public class MainMenu extends Menu {
     }
 
     @Override
-    public void nativeKeyTyped(NativeKeyEvent e) {
-        switch (e.getKeyChar()){
-            case '1': loadPersonnelMenu();
-            case '2': loadPatientsMenu();
-            case '3': loadAmbulanceMenu();
-            case '4': quit();
+    protected void menu(int opt) {
+        switch (opt) {
+            case 1: loadPersonnelMenu(); break;
+            case 2: loadPatientsMenu(); break;
+            case 3: loadAmbulanceMenu(); break;
+            case 4: quit(); break;
+            default: invalidOption(); break;
         }
     }
 
     private void loadPersonnelMenu(){
-        GlobalScreen.removeNativeKeyListener(this);
         clearScreen();
-        GlobalScreen.addNativeKeyListener(new PersonnelMenu());
+        new PersonnelMenu();
     }
 
     private void loadPatientsMenu(){

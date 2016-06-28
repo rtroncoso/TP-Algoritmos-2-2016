@@ -2,6 +2,7 @@ package com.cst.events;
 
 
 import com.cst.events.listeners.TripFinishedListener;
+import com.cst.exceptions.NoDoctorAvailableException;
 import com.cst.model.clinic.Trip;
 import com.cst.model.employee.Stretcher;
 
@@ -26,7 +27,11 @@ public class TripFinished implements Event<TripFinishedListener> {
      * @param listener
      */
     public void notify(final TripFinishedListener listener) {
-        listener.onTripFinished(this.trip);
+        try {
+            listener.onTripFinished(this.trip);
+        } catch (NoDoctorAvailableException e) {
+            e.printStackTrace();
+        }
     }
 
 }

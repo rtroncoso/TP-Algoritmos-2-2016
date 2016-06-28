@@ -1,9 +1,13 @@
 package com.cst.view;
 
+import com.cst.App;
+import com.cst.model.clinic.Salary;
+import com.cst.model.employee.Employee;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA by: alejandro
@@ -22,19 +26,21 @@ public class PersonnelMenu extends Menu {
     }
 
     @Override
-    public void nativeKeyTyped(NativeKeyEvent e) {
-        switch (e.getKeyChar()){
-            case '1': loadSalaries();
-            case '2': loadPatientsMenu();     //TODO: hacerlo posta
-            case '3': loadAmbulanceMenu();
+    protected void menu(int opt) {
+        clearScreen();
+        System.out.println(opt+": ");
+        switch (opt){
+            case 1: loadSalaries(); break;
+            default: invalidOption(); break;
         }
     }
 
     private void loadSalaries(){
-        GlobalScreen.removeNativeKeyListener(this);
         // TODO: escupir salarios, (con algun key listener para volver a algún menu)
-        clearScreen();
-        GlobalScreen.addNativeKeyListener(new PersonnelMenu());
+        List<Employee> employees = App.CLINIC.getEmployees();
+        for (Employee employee : employees) {
+            System.out.println((new Salary(employee)).toString());
+        }
     }
 
     private void loadPatientsMenu(){
