@@ -10,7 +10,7 @@ import com.cst.model.clinic.Visit;
 public class Doctor extends Employee {
 
     /** Salary modifier for patients without healthcare */
-    public static final int NON_HEALTHCARE_SALARY_MODIFIER = 75;
+    public static final int BASE_VISIT_PRICE = 75;
 
     /**
      * Doctor class constructor
@@ -26,21 +26,22 @@ public class Doctor extends Employee {
      * @param visit
      */
     public void addSalary(Visit visit, Clinic clinic) {
+        double price = 0.0d;
+
         if(visit.getPatient().getAge() < 18) {
             try {
                 Administrative ad = clinic.getFreeAdministrativeEmployee();
-                this.addSalary(ad.calculate(visit));
-                return;
+                price = ad.calculate(visit);
             } catch (NoAdministrativeAvailableException e) { }
+        } else {
+            price = visit.getPatient().getAge() * Doctor.BASE_VISIT_PRICE;
         }
 
-        if(visit.getPatient().getHealthcare() == null) {
-            this.addSalary(visit.getPatient().getAge() *
-                Doctor.NON_HEALTHCARE_SALARY_MODIFIER);
-            return;
+        if(visit.getPatient().getHealthcare() != null) {
+            price = visit.getPatient().getHealthcare().applyDiscount(price);
         }
 
-        // TODO : Calculate salaries for healthcare-covered patients
+        this.addSalary(price);
     }
 
 }

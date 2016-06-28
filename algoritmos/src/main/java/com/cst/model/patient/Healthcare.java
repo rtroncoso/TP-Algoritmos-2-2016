@@ -1,5 +1,7 @@
 package com.cst.model.patient;
 
+import com.cst.model.clinic.Visit;
+
 /**
  * Healthcare class - Translation: "Obra Social"
  */
@@ -13,12 +15,21 @@ public class Healthcare {
 
     /**
      * Healthcare class Constructor
-     * @param discount
+     * @param discount percentage
      * @param company
      */
     public Healthcare(Long discount, String company) {
         this.discount = discount;
         this.company = company;
+    }
+
+    /**
+     * Applies a healthcare discount to a given salary calculation
+     * @param salary
+     * @return
+     */
+    public double applyDiscount(double salary) {
+        return salary - ((this.discount * salary) / 100);
     }
 
     /**

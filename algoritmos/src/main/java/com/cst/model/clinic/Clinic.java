@@ -61,6 +61,10 @@ public class Clinic implements
 
     /**
      * Event fired when a trip gets finished
+     *
+     * TODO : If no doctors are available, patients should be moved to a
+     *        waiting pool and get attended as soon as a doctor frees up
+     *
      * @param trip
      */
     public void onTripFinished(Trip trip) throws NoDoctorAvailableException {
