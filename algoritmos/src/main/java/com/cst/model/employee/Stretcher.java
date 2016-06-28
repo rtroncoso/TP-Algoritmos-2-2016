@@ -95,20 +95,4 @@ public class Stretcher extends Employee implements EmergencyCallDispatchListener
         this.currentTrip = currentTrip;
     }
 
-    /**
-     * Stretcher clinic getter
-     * @return Clinic
-     */
-    public Clinic getClinic() {
-        return clinic;
-    }
-
-    /**
-     * Stretcher clinic setter
-     * @param clinic
-     */
-    public void setClinic(Clinic clinic) {
-        this.clinic = clinic;
-    }
-
 }
