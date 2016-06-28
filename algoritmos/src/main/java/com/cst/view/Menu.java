@@ -3,7 +3,6 @@ package com.cst.view;
 import com.cst.util.KeyboardListener;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**

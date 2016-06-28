@@ -40,6 +40,7 @@ public abstract class Employee {
     public Employee(String name, double baseSalary) {
         this.status = Employee.STATUS_WAITING;
         this.baseSalary = baseSalary;
+        this.salary = baseSalary;
         this.name = name;
     }
 
