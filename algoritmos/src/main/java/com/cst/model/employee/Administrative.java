@@ -13,10 +13,9 @@ public class Administrative extends Employee {
      *
      * @param name
      * @param salary
-     * @param clinic
      */
-    public Administrative(String name, double salary, Clinic clinic) {
-        super(name, salary, clinic);
+    public Administrative(String name, double salary) {
+        super(name, salary);
     }
 
     /**

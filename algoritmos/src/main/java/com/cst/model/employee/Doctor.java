@@ -16,20 +16,19 @@ public class Doctor extends Employee {
      * Doctor class constructor
      * @param name
      * @param salary
-     * @param clinic
      */
-    public Doctor(String name, double salary, Clinic clinic){
-        super(name, salary, clinic);
+    public Doctor(String name, double salary){
+        super(name, salary);
     }
 
     /**
      * Adds a salary to a doctor based on an operation
      * @param operation
      */
-    public void addSalary(Operation operation) {
+    public void addSalary(Operation operation, Clinic clinic) {
         if(operation.getPatient().getAge() < 18) {
             try {
-                Administrative ad = this.clinic.getFreeAdministrativeEmployee();
+                Administrative ad = clinic.getFreeAdministrativeEmployee();
                 this.addSalary(ad.calculate(operation));
             } catch (NoAdministrativeAvailableException e) { }
         }
