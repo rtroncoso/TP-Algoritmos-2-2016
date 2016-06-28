@@ -3,6 +3,8 @@ package com.cst.model.clinic;
 import com.cst.model.patient.Patient;
 import com.cst.model.employee.Doctor;
 
+import java.util.Calendar;
+
 /**
  * Visit class
  */
@@ -22,6 +24,12 @@ public abstract class Visit {
 
     /** Patient associated to this patient */
     protected Patient patient;
+
+    /** Date in which this operation started */
+    private Calendar startedAt;
+
+    /** Date in which this operation finished */
+    private Calendar finishedAt;
 
     /** Current status of this visit */
     private int status;
@@ -88,6 +96,38 @@ public abstract class Visit {
      */
     public void setStatus(int status) {
         this.status = status;
+    }
+
+    /**
+     * Visit startedAt getter
+     * @return Calendar
+     */
+    public Calendar getStartedAt() {
+        return startedAt;
+    }
+
+    /**
+     * Visit startedAt setter
+     * @param startedAt
+     */
+    public void setStartedAt(Calendar startedAt) {
+        this.startedAt = startedAt;
+    }
+
+    /**
+     * Visit finishedAt getter
+     * @return Calendar
+     */
+    public Calendar getFinishedAt() {
+        return finishedAt;
+    }
+
+    /**
+     * Visit finishedAt setter
+     * @param finishedAt
+     */
+    public void setFinishedAt(Calendar finishedAt) {
+        this.finishedAt = finishedAt;
     }
 
 }

@@ -1,6 +1,7 @@
 package com.cst.model.clinic;
 
 import com.cst.events.*;
+import com.cst.events.listeners.OperationFinishedListener;
 import com.cst.events.listeners.OperationStartedListener;
 import com.cst.events.listeners.TripFinishedListener;
 import com.cst.exceptions.NoAdministrativeAvailableException;
@@ -21,7 +22,9 @@ import java.util.List;
 /**
  * Clinic class - Base container model
  */
-public class Clinic implements TripFinishedListener, OperationStartedListener {
+public class Clinic implements
+        TripFinishedListener, OperationStartedListener,
+        OperationFinishedListener {
 
     /** List of doctors assigned to the clinic */
     private List<Doctor> doctors;
@@ -73,8 +76,20 @@ public class Clinic implements TripFinishedListener, OperationStartedListener {
      * @param operation
      */
     public void onOperationStarted(Operation operation) {
+        this.operations.add(operation);
         operation.setStatus(Visit.STATUS_IN_PROGRESS);
+        operation.getDoctor().setStatus(Employee.STATUS_OPERATION);
         operation.getDoctor().addSalary(operation, this);
+        operation.perform();
+    }
+
+    /**
+     * Operation started event listener
+     * @param operation
+     */
+    public void onOperationFinished(Operation operation) {
+        operation.getDoctor().setStatus(Employee.STATUS_WAITING);
+        operation.setStatus(Visit.STATUS_FINISHED);
         operation.perform();
     }
 

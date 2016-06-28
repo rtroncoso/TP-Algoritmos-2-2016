@@ -18,6 +18,7 @@ public class EmergencyCallDispatch implements Event<EmergencyCallDispatchListene
     /**
      * EmergencyCallDispatch class constructor
      * @param trip
+     * @param clinic
      */
     public EmergencyCallDispatch(Trip trip, Clinic clinic) {
         this.trip = trip;

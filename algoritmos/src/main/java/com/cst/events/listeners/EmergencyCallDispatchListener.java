@@ -11,6 +11,7 @@ public interface EmergencyCallDispatchListener {
     /**
      * Event method for when a emergency gets dispatched
      * @param trip
+     * @param clinic
      */
     void onEmergencyCallDispatch(Trip trip, Clinic clinic);
 

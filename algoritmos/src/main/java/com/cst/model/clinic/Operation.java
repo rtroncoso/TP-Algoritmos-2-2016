@@ -22,7 +22,7 @@ public class Operation extends Visit {
      * Performs an operation on a patient
      */
     public void perform() {
-
+        // wtf does this have to do
     }
 
 }

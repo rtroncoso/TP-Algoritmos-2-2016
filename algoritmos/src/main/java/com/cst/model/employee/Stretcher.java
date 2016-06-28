@@ -42,6 +42,7 @@ public class Stretcher extends Employee implements EmergencyCallDispatchListener
     /**
      * Called when an emergency gets dispatched
      * @param trip
+     * @param clinic
      */
     public void onEmergencyCallDispatch(Trip trip, Clinic clinic) {
         if(trip.getStatus() == Trip.STATUS_WAITING &&
