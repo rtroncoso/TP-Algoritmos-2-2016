@@ -1,9 +1,7 @@
 package com.cst.model.clinic;
 
 import com.cst.events.*;
-import com.cst.events.listeners.OperationFinishedListener;
-import com.cst.events.listeners.OperationStartedListener;
-import com.cst.events.listeners.TripFinishedListener;
+import com.cst.events.listeners.*;
 import com.cst.exceptions.NoAdministrativeAvailableException;
 import com.cst.exceptions.NoDoctorAvailableException;
 import com.cst.exceptions.NoStretcherAvailableException;
@@ -24,7 +22,8 @@ import java.util.List;
  */
 public class Clinic implements
         TripFinishedListener, OperationStartedListener,
-        OperationFinishedListener {
+        OperationFinishedListener, ConsultStartedListener,
+        ConsultFinishedListener {
 
     /** List of doctors assigned to the clinic */
     private List<Doctor> doctors;
@@ -37,6 +36,9 @@ public class Clinic implements
 
     /** List of operations performed by the clinic */
     private List<Operation> operations;
+
+    /** List of consults performed by the clinic */
+    private List<Consult> consults;
 
     /** Clinics will handle their own event dispatchers */
     private Dispatcher dispatcher;
@@ -80,7 +82,6 @@ public class Clinic implements
         operation.setStatus(Visit.STATUS_IN_PROGRESS);
         operation.getDoctor().setStatus(Employee.STATUS_OPERATION);
         operation.getDoctor().addSalary(operation, this);
-        operation.perform();
     }
 
     /**
@@ -90,7 +91,26 @@ public class Clinic implements
     public void onOperationFinished(Operation operation) {
         operation.getDoctor().setStatus(Employee.STATUS_WAITING);
         operation.setStatus(Visit.STATUS_FINISHED);
-        operation.perform();
+    }
+
+    /**
+     * Consult started event listener
+     * @param consult
+     */
+    public void onConsultStarted(Consult consult) {
+        this.consults.add(consult);
+        consult.getDoctor().setStatus(Employee.STATUS_CONSULT);
+        consult.getDoctor().addSalary(consult, this);
+        consult.setStatus(Visit.STATUS_IN_PROGRESS);
+    }
+
+    /**
+     * Consult finished event listener
+     * @param consult
+     */
+    public void onConsultFinished(Consult consult) {
+        consult.getDoctor().setStatus(Employee.STATUS_WAITING);
+        consult.setStatus(Visit.STATUS_FINISHED);
     }
 
     /**

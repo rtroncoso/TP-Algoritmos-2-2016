@@ -2,7 +2,7 @@ package com.cst.model.employee;
 
 import com.cst.exceptions.NoAdministrativeAvailableException;
 import com.cst.model.clinic.Clinic;
-import com.cst.model.clinic.Operation;
+import com.cst.model.clinic.Visit;
 
 /**
  * Doctor class
@@ -22,19 +22,20 @@ public class Doctor extends Employee {
     }
 
     /**
-     * Adds a salary to a doctor based on an operation
-     * @param operation
+     * Adds a salary to a doctor based on a visit
+     * @param visit
      */
-    public void addSalary(Operation operation, Clinic clinic) {
-        if(operation.getPatient().getAge() < 18) {
+    public void addSalary(Visit visit, Clinic clinic) {
+        if(visit.getPatient().getAge() < 18) {
             try {
                 Administrative ad = clinic.getFreeAdministrativeEmployee();
-                this.addSalary(ad.calculate(operation));
+                this.addSalary(ad.calculate(visit));
+                return;
             } catch (NoAdministrativeAvailableException e) { }
         }
 
-        if(operation.getPatient().getHealthcare() == null) {
-            this.addSalary(operation.getPatient().getAge() *
+        if(visit.getPatient().getHealthcare() == null) {
+            this.addSalary(visit.getPatient().getAge() *
                 Doctor.NON_HEALTHCARE_SALARY_MODIFIER);
             return;
         }

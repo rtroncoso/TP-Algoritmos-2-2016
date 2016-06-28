@@ -1,7 +1,7 @@
 package com.cst.model.employee;
 
 import com.cst.model.clinic.Clinic;
-import com.cst.model.clinic.Operation;
+import com.cst.model.clinic.Visit;
 
 /**
  * Administrative class
@@ -19,11 +19,11 @@ public class Administrative extends Employee {
     }
 
     /**
-     * Calculates the salary for a given operation
-     * @param operation
+     * Calculates the salary to be paid for a given consult
+     * @param consult
      * @return double
      */
-    public double calculate(Operation operation) {
+    public double calculate(Visit consult) {
         return 0;
     }
 
