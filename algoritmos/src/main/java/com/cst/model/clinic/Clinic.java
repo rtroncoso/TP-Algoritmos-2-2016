@@ -72,7 +72,6 @@ public class Clinic implements
             Doctor doctor = this.getFreeDoctor();
             Operation operation = new Operation(doctor, patient);
 
-            this.operations.add(operation);
             this.dispatcher.notify(new OperationStarted(operation));
         }
     }
