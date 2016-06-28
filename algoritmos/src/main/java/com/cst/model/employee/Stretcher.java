@@ -29,9 +29,6 @@ public class Stretcher extends Employee implements EmergencyCallDispatchListener
     /** Current trip being carried by the stretcher */
     private Trip currentTrip;
 
-    /** Clinic associated with this stretcher */
-    private Clinic clinic;
-
     /**
      * Stretcher class constructor
      * @param name
@@ -39,7 +36,6 @@ public class Stretcher extends Employee implements EmergencyCallDispatchListener
      */
     public Stretcher(String name, double salary) {
         super(name, salary);
-        this.clinic = clinic;
         this.trips = new ArrayList<Trip>();
     }
 
@@ -47,7 +43,7 @@ public class Stretcher extends Employee implements EmergencyCallDispatchListener
      * Called when an emergency gets dispatched
      * @param trip
      */
-    public void onEmergencyCallDispatch(Trip trip) {
+    public void onEmergencyCallDispatch(Trip trip, Clinic clinic) {
         if(trip.getStatus() == Trip.STATUS_WAITING &&
            this.status == Employee.STATUS_WAITING) {
             this.addSalary(DateHelper.isWeekend(trip.getDate()) ?
@@ -63,7 +59,7 @@ public class Stretcher extends Employee implements EmergencyCallDispatchListener
             this.setStatus(Employee.STATUS_TRIPPING);
             trip.setStatus(Trip.STATUS_ON_ROUTE);
             trip.setStretcher(this);
-            this.clinic.getDispatcher().notify(new TripStarted(trip, this));
+            clinic.getDispatcher().notify(new TripStarted(trip, this));
         }
     }
 
