@@ -8,9 +8,7 @@ import com.cst.model.clinic.Trip;
 import com.cst.model.employee.Stretcher;
 import com.cst.model.patient.Patient;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * SATSystem class - translation: "Sistema de Atención Telefónica"
@@ -45,16 +43,19 @@ public class SATSystem implements TripStartedListener {
      * with a given distance and patients
      * @param distance
      * @param patients
+     * @param date
      */
-    public void startEmergency(int distance, ArrayList<Patient> patients)
+    public Trip startEmergency(int distance, ArrayList<Patient> patients, Calendar date)
             throws CallAlreadyDispatched {
         if(this.status == SATSystem.STATUS_DISPATCHED) {
             throw new CallAlreadyDispatched();
         }
 
         Trip trip = new Trip(distance, patients, this.clinic);
+        trip.setDate(date);
         this.clinic.getDispatcher().notify(new EmergencyCallDispatch(trip, this.clinic));
         this.status = SATSystem.STATUS_DISPATCHED;
+        return trip;
     }
 
     /**
@@ -62,10 +63,11 @@ public class SATSystem implements TripStartedListener {
      * with a given distance and patients
      * @param distance
      * @param patient
+     * @param date
      */
-    public void startEmergency(int distance, Patient patient)
+    public void startEmergency(int distance, Patient patient, Calendar date)
             throws CallAlreadyDispatched {
-        this.startEmergency(distance, new ArrayList<Patient>((Collection<? extends Patient>) patient));
+        this.startEmergency(distance, new ArrayList<Patient>((Collection<? extends Patient>) patient), date);
     }
 
     /**

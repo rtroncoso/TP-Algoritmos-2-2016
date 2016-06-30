@@ -77,4 +77,14 @@ public final class Dispatcher {
         }
     }
 
+    /**
+     * Notifies an event to only one listener
+     * @param evt
+     * @param <L>
+     */
+    public <L> void notify(final Event<L> evt, L listener) {
+        evt.notify(listener);
+    }
+
+
 }

@@ -75,10 +75,7 @@ public class Trip implements DistanceTravelledListener {
      * @param trip
      */
     public void onDistanceTravelled(Trip trip) {
-        if(trip != this) return; // dirty fix for global events
-
         if(this.travelled >= this.distance) {
-            // TODO : Fire an event or start right away an operation through clinic object
             this.clinic.getDispatcher().notify(new TripFinished(this));
             this.stretcher.setStatus(Employee.STATUS_WAITING);
             this.setStatus(Trip.STATUS_FINISHED);
