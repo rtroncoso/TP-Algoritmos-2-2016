@@ -17,9 +17,6 @@ public class App {
     public static final String ANSI_WHITE = "\u001B[37m";
     public static final Clinic CLINIC = new Clinic();
 
-    // TODO: meter algun loop para que el programa siga corriendo (buscar un lugar piola o significativo)
-    // IDEA: que sea algo llamando al MainMenu si no hay ningún NativeKeyListener en el GlobalScreen
-    // PROTIP: (new Scanner(System.in)).nextLine() borra el input!!
     public static void main(String[] args) {
         System.out.println("Bienvenido!");
         simulation1();

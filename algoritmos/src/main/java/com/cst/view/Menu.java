@@ -1,6 +1,6 @@
 package com.cst.view;
 
-import com.cst.util.KeyboardListener;
+import com.cst.util.InputListener;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -10,7 +10,7 @@ import java.util.Scanner;
  * Date: 24/06/16
  * Time: 14:20
  */
-public abstract class Menu extends KeyboardListener {
+public abstract class Menu implements InputListener {
 
     protected String title;
     protected ArrayList<String> options;
@@ -38,6 +38,10 @@ public abstract class Menu extends KeyboardListener {
     protected void clearScreen(){
         System.out.print("\033[H\033[2J");
         System.out.flush();
+    }
+
+    public void inputReceived(String input){
+        menu(Integer.parseInt(input));
     }
 
     protected void invalidOption(){
