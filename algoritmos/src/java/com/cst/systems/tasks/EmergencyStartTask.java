@@ -6,6 +6,7 @@ import com.cst.factory.PatientFactory;
 import com.cst.model.clinic.Trip;
 import com.cst.model.patient.Patient;
 import com.cst.systems.RealTimeEmergencySystem;
+import com.cst.systems.SATSystem;
 import com.cst.util.RandomNumber;
 
 import java.util.ArrayList;
@@ -38,7 +39,9 @@ public class EmergencyStartTask extends HourElapsedTask {
     public void run() {
         // Re-schedule this task for one hour
         this.rteSystem.addTask(new EmergencyStartTask(this.rteSystem), HourElapsedTask.HOUR_DURATION);
-        if(this.percentageChance(this.EMERGENCY_CHANCE_FACTOR)) {
+        if(this.percentageChance(this.EMERGENCY_CHANCE_FACTOR) &&
+           this.rteSystem.getClinic().getSatSystem().getStatus() !=
+                   SATSystem.STATUS_DISPATCHED) {
             ArrayList<Patient> patients = new ArrayList<Patient>();
 
             for(int i=0; i < RandomNumber.get(1, 2); i++) {
@@ -53,7 +56,7 @@ public class EmergencyStartTask extends HourElapsedTask {
 
                 this.rteSystem.addTask(
                     new DistanceTravelledTask(this.rteSystem, trip),
-                    DistanceTravelledTask.HOUR_DURATION * .1
+                    DistanceTravelledTask.HOUR_DURATION * .1 // 10 minutes per kilometer
                 );
             } catch (CallAlreadyDispatched callAlreadyDispatched) {
             }

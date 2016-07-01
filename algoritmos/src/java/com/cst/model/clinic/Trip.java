@@ -76,17 +76,19 @@ public class Trip implements DistanceTravelledListener {
      * @param trip
      */
     public void onDistanceTravelled(Trip trip) {
-        if(this.travelled >= this.distance) {
-            this.clinic.getDispatcher().notify(new TripFinished(this));
-            this.stretcher.setStatus(Employee.STATUS_WAITING);
-            this.setStatus(Trip.STATUS_FINISHED);
+        if(trip != this) return; // Dirty fix for global events comes up again
+
+        if(trip.travelled >= trip.distance) {
+            trip.setStatus(Trip.STATUS_FINISHED);
+            trip.stretcher.setStatus(Employee.STATUS_WAITING);
+            trip.clinic.getDispatcher().notify(new TripFinished(trip));
             return;
         }
 
-        this.getStretcher().addSalary(DateHelper.isWeekend(this.date) ?
+        trip.getStretcher().addSalary(DateHelper.isWeekend(trip.date) ?
                 Stretcher.DISTANCE_TRAVELLED_SALARY * 2 :
                 Stretcher.DISTANCE_TRAVELLED_SALARY);
-        this.travelled += 1;
+        trip.travelled += 1;
     }
 
     /**

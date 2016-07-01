@@ -184,7 +184,8 @@ public class RealTimeEmergencyMenu implements
      * @param operation
      */
     public void onOperationFinished(Operation operation) {
-        this.print("La operación ha finalizado con éxito!");
+        this.print("La operación del doctor " + operation.getDoctor().getName() +
+                " ha finalizado con éxito!");
     }
 
 }

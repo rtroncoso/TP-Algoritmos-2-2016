@@ -4,6 +4,8 @@ import com.cst.events.DistanceTravelled;
 import com.cst.model.clinic.Trip;
 import com.cst.systems.RealTimeEmergencySystem;
 
+import java.util.Calendar;
+
 /**
  * DistanceTravelledTask class
  */
@@ -29,6 +31,7 @@ public class DistanceTravelledTask extends HourElapsedTask {
                 DistanceTravelledTask.HOUR_DURATION * .1
             );
 
+            this.rteSystem.getTime().add(Calendar.MINUTE, 10);
             this.rteSystem.getClinic().getDispatcher().notify(new DistanceTravelled(this.trip));
         }
     }
