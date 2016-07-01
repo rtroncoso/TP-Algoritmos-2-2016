@@ -56,6 +56,9 @@ public class HourElapsedTask extends Task {
                 );
             }
         }
+
+        // Start this system again in one hour
+        this.rteSystem.addTask(new HourElapsedTask(this.rteSystem), this.HOUR_DURATION);
     }
 
 }

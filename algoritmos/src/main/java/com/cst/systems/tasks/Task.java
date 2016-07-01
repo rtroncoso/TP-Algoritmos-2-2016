@@ -36,7 +36,8 @@ public abstract class Task extends TimerTask {
      * @return
      */
     public boolean percentageChance(int chance) {
-        return new Faker().number().numberBetween(1, 100) <= chance;
+        int number = new Faker().number().numberBetween(1, 100);
+        return (number <= chance);
     }
 
 }

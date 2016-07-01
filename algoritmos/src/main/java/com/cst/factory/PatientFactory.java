@@ -16,11 +16,11 @@ public class PatientFactory extends Factory<Patient> {
         return new Patient(
             this.faker.name().fullName(),
             this.faker.number().numberBetween(10, 90),
-            this.faker.bool().bool() ?
+            (this.faker.number().numberBetween(0, 1) == 1 ?
                 new Healthcare(
                     this.faker.number().numberBetween((long) 1, (long) 100),
                     this.faker.company().name()
-                ) : null
+                ) : null)
         );
     }
 

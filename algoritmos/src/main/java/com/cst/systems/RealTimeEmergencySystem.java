@@ -1,7 +1,9 @@
 package com.cst.systems;
 
+import com.cst.events.OperationFinished;
 import com.cst.events.OperationStarted;
 import com.cst.events.TripFinished;
+import com.cst.events.listeners.OperationFinishedListener;
 import com.cst.events.listeners.OperationStartedListener;
 import com.cst.model.clinic.Clinic;
 import com.cst.model.clinic.Operation;
@@ -59,6 +61,15 @@ public class RealTimeEmergencySystem implements OperationStartedListener {
     }
 
     /**
+     * Waits for an operation to start to create it's
+     * finishing task
+     * @param operation
+     */
+    public void onOperationStarted(Operation operation) {
+        this.addTask(new OperationFinishTask(this, operation), OperationFinishTask.OPERATION_DURATION);
+    }
+
+    /**
      * Adds a task to the system, units of time registered in hours
      * @param task
      * @param time
@@ -82,16 +93,6 @@ public class RealTimeEmergencySystem implements OperationStartedListener {
         }
 
         throw new InvalidParameterException();
-    }
-
-    /**
-     * Waits for an operation to start to create it's
-     * finishing task
-     * @param operation
-     */
-    public void onOperationStarted(Operation operation) {
-        this.addTask(new OperationFinishTask(this, operation),
-                this.getMilliseconds(OperationFinishTask.OPERATION_DURATION));
     }
 
     /**

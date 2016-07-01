@@ -1,12 +1,17 @@
 package com.cst.view;
 
+import com.cst.events.*;
+import com.cst.events.listeners.*;
 import com.cst.factory.AdministrativeFactory;
 import com.cst.factory.DoctorFactory;
 import com.cst.factory.StretcherFactory;
 import com.cst.model.clinic.Clinic;
+import com.cst.model.clinic.Operation;
+import com.cst.model.clinic.Trip;
 import com.cst.model.employee.Administrative;
 import com.cst.model.employee.Doctor;
 import com.cst.model.employee.Stretcher;
+import com.cst.model.patient.Patient;
 import com.cst.systems.RealTimeEmergencySystem;
 import com.cst.util.RandomNumber;
 
@@ -18,7 +23,10 @@ import java.util.Scanner;
  * Ties up all systems together and launches the emergency system.
  * Handles all console ouput for every event.
  */
-public class RealTimeEmergencyMenu {
+public class RealTimeEmergencyMenu implements
+        EmergencyCallDispatchListener, TripStartedListener,
+        DistanceTravelledListener, OperationStartedListener,
+        OperationFinishedListener {
 
     /** Real time emergency system instance reference */
     private RealTimeEmergencySystem rteSystem;
@@ -33,6 +41,12 @@ public class RealTimeEmergencyMenu {
      * RealTimeEmergencyMenu constructor
      */
     public RealTimeEmergencyMenu(){
+        this.clinic.getDispatcher().listen(EmergencyCallDispatch.class, this);
+        this.clinic.getDispatcher().listen(TripStarted.class, this);
+        this.clinic.getDispatcher().listen(DistanceTravelled.class, this);
+        this.clinic.getDispatcher().listen(OperationStarted.class, this);
+        this.clinic.getDispatcher().listen(OperationFinished.class, this);
+
         // Step one hour every 10 seconds
         this.rteSystem = new RealTimeEmergencySystem(this.clinic, 1, 's');
         this.addStretchers();
@@ -115,8 +129,62 @@ public class RealTimeEmergencyMenu {
     private void showHelp() {
         System.out.println("================================================================");
         System.out.println("Bienvenido al sistema de emergencias automatizado de la clínica!");
+        System.out.println("Cada una hora habrá una posibilidad de 20% de que se genere una emergencia.");
         System.out.println("Ingrese \"start\" para empezar");
         System.out.println("Ingrese \"quit\" en cualquier momento para salir del sistema de emergencias.");
+    }
+
+    /**
+     * Fired when an emergency call gets dispatched
+     * @param trip
+     * @param clinic
+     */
+    public void onEmergencyCallDispatch(Trip trip, Clinic clinic) {
+        this.print("Se ha recibido una llamada de emergencia a " +
+                trip.getDistance() + " kilómetros de la clínica!");
+        for(Patient patient : trip.getPatients()) {
+            this.print("Paciente asociado a la llamada: " + patient.getName() +
+                       ((patient.getHealthcare() != null) ?
+                       " con obra social: " + patient.getHealthcare().getCompany() :
+                       " sin obra social."));
+        }
+    }
+
+    /**
+     * Fired when a trip to the clinic gets started
+     * @param trip
+     * @param stretcher
+     */
+    public void onTripStarted(Trip trip, Stretcher stretcher) {
+        this.print("El camillero " + stretcher.getName() + " ha atendido la llamada y " +
+                   "está en camino a la clinica!");
+    }
+
+    /**
+     * Fired when the trip progresses 1 kilometer of distance
+     * @param trip
+     */
+    public void onDistanceTravelled(Trip trip) {
+        this.print("La ambulancia ha avanzado un kilómetro, quedan " +
+                   (trip.getDistance() - trip.getTravelled()) +
+                   " kilómetros para llegar a la clínica.");
+    }
+
+    /**
+     * Fired when an operation gets started
+     * @param operation
+     */
+    public void onOperationStarted(Operation operation) {
+        this.print("La ambulancia ha llegado a la clínica y el doctor " +
+                   operation.getDoctor().getName() + " está atendiendo la operación.");
+    }
+
+    /**
+     * Fired when an operation gets finished
+     * @param operation
+     */
+    public void onOperationFinished(Operation operation) {
+        this.print("La operación ha finalizado con éxito!");
     }
 
 }

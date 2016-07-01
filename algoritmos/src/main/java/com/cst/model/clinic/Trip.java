@@ -55,6 +55,7 @@ public class Trip implements DistanceTravelledListener {
      */
     public Trip(int distance, ArrayList<Patient> patients, Clinic clinic) {
         clinic.getDispatcher().listen(DistanceTravelled.class, this);
+        this.status = STATUS_WAITING;
         this.clinic = clinic;
         this.distance = distance;
         this.patients = patients;
@@ -97,11 +98,11 @@ public class Trip implements DistanceTravelledListener {
     }
 
     /**
-     * Trip distance setter
-     * @param distance
+     * Trip travelled getter
+     * @return int
      */
-    public void setDistance(int distance) {
-        this.distance = distance;
+    public int getTravelled() {
+        return travelled;
     }
 
     /**

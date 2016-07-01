@@ -52,10 +52,16 @@ public class Clinic implements
         this.doctors = new ArrayList<Doctor>();
         this.administratives = new ArrayList<Administrative>();
         this.stretchers = new ArrayList<Stretcher>();
+        this.operations = new ArrayList<Operation>();
+        this.consults = new ArrayList<Consult>();
         this.dispatcher = new Dispatcher();
         this.satSystem = new SATSystem(this);
         this.dispatcher.listen(TripStarted.class, this.satSystem);
         this.dispatcher.listen(TripFinished.class, this);
+        this.dispatcher.listen(OperationStarted.class, this);
+        this.dispatcher.listen(OperationFinished.class, this);
+        this.dispatcher.listen(ConsultStarted.class, this);
+        this.dispatcher.listen(ConsultFinished.class, this);
     }
 
     /**
@@ -72,6 +78,7 @@ public class Clinic implements
             Operation operation = new Operation(doctor, patient);
 
             this.dispatcher.notify(new OperationStarted(operation));
+            return;
         }
     }
 
@@ -93,6 +100,7 @@ public class Clinic implements
     public void onOperationFinished(Operation operation) {
         operation.getDoctor().setStatus(Employee.STATUS_WAITING);
         operation.setStatus(Visit.STATUS_FINISHED);
+        this.satSystem.setStatus(SATSystem.STATUS_WAITING);
     }
 
     /**

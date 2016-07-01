@@ -1,5 +1,6 @@
 package com.cst.systems.tasks;
 
+import com.cst.events.DistanceTravelled;
 import com.cst.model.clinic.Trip;
 import com.cst.systems.RealTimeEmergencySystem;
 
@@ -22,14 +23,14 @@ public class DistanceTravelledTask extends HourElapsedTask {
 
     @Override
     public void run() {
-        if(this.trip.getStatus() == Trip.STATUS_FINISHED) {
-            return;
-        }
+        if(this.trip.getStatus() == Trip.STATUS_ON_ROUTE) {
+            this.rteSystem.addTask(
+                new DistanceTravelledTask(this.rteSystem, this.trip),
+                DistanceTravelledTask.HOUR_DURATION * .1
+            );
 
-        this.rteSystem.addTask(
-            new DistanceTravelledTask(this.rteSystem, trip),
-            this.rteSystem.getMilliseconds(DistanceTravelledTask.HOUR_DURATION * .1) // 10 minutes per kilometer
-        );
+            this.rteSystem.getClinic().getDispatcher().notify(new DistanceTravelled(this.trip));
+        }
     }
 
 }

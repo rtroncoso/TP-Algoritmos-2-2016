@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class EmergencyStartTask extends HourElapsedTask {
 
     /** Chance factor to start an emergency (percentage) */
-    public static final int EMERGENCY_CHANCE_FACTOR = 1;
+    public static final int EMERGENCY_CHANCE_FACTOR = 30;
 
     /** Max distance to launch an emergency */
     public static final int MAX_EMERGENCY_DISTANCE = 20;
@@ -36,7 +36,9 @@ public class EmergencyStartTask extends HourElapsedTask {
      */
     @Override
     public void run() {
-        if(this.percentageChance(this.MAX_EMERGENCY_DISTANCE)) {
+        // Re-schedule this task for one hour
+        this.rteSystem.addTask(new EmergencyStartTask(this.rteSystem), HourElapsedTask.HOUR_DURATION);
+        if(this.percentageChance(this.EMERGENCY_CHANCE_FACTOR)) {
             ArrayList<Patient> patients = new ArrayList<Patient>();
 
             for(int i=0; i < RandomNumber.get(1, 3); i++) {
@@ -45,15 +47,13 @@ public class EmergencyStartTask extends HourElapsedTask {
 
             try {
                 Trip trip = this.rteSystem.getClinic().getSatSystem().startEmergency(
-                    RandomNumber.get(1, this.MAX_EMERGENCY_DISTANCE), patients,
+                    RandomNumber.get(1, MAX_EMERGENCY_DISTANCE), patients,
                     this.rteSystem.getTime()
                 );
 
                 this.rteSystem.addTask(
                     new DistanceTravelledTask(this.rteSystem, trip),
-                    this.rteSystem.getMilliseconds(
-                        DistanceTravelledTask.HOUR_DURATION * .1 // 10 minutes per kilometer
-                    )
+                    DistanceTravelledTask.HOUR_DURATION * .1
                 );
             } catch (CallAlreadyDispatched callAlreadyDispatched) {
             }

@@ -1,6 +1,7 @@
 package com.cst.systems;
 
 import com.cst.events.EmergencyCallDispatch;
+import com.cst.events.TripStarted;
 import com.cst.events.listeners.TripStartedListener;
 import com.cst.exceptions.CallAlreadyDispatched;
 import com.cst.model.clinic.Clinic;
@@ -35,6 +36,7 @@ public class SATSystem implements TripStartedListener {
      * @param clinic
      */
     public SATSystem(Clinic clinic) {
+        clinic.getDispatcher().listen(TripStarted.class, this);
         this.clinic = clinic;
     }
 
@@ -75,9 +77,8 @@ public class SATSystem implements TripStartedListener {
      * @param trip
      */
     public void onTripStarted(Trip trip, Stretcher stretcher) {
-        // TODO : Implement RTES (Real Time Emergency System) and start
-        //        to count the distance travelled by the stretcher
         this.status = SATSystem.STATUS_WAITING;
+        trip.setStatus(Trip.STATUS_ON_ROUTE);
     }
 
     /**
@@ -94,6 +95,22 @@ public class SATSystem implements TripStartedListener {
      */
     public void setClinic(Clinic clinic) {
         this.clinic = clinic;
+    }
+
+    /**
+     * SATSystem status getter
+     * @return
+     */
+    public int getStatus() {
+        return this.status;
+    }
+
+    /**
+     * SATSystem status setter
+     * @param status
+     */
+    public void setStatus(int status) {
+        this.status = status;
     }
 
 }

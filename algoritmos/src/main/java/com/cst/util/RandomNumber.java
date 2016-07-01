@@ -10,7 +10,7 @@ public class RandomNumber {
     private static Random randomGenerator;
 
     public static int get(int min, int max) {
-        return ((int) new Random().nextDouble() + min) * max;
+        return (int) (Math.random() * (max - min)) + min;
     }
 
 }
