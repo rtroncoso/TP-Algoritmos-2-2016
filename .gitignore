@@ -3,6 +3,7 @@
 modules.xml
 
 # User-specific stuff:
+.DS_Store
 .idea/
 
 ## File-based project format:
