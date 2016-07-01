@@ -45,6 +45,7 @@ public class RealTimeEmergencySystem implements OperationStartedListener {
         this.clinic = clinic;
         this.setUnit(unit);
         this.step = step;
+        this.time = Calendar.getInstance();
     }
 
     /**
@@ -121,11 +122,7 @@ public class RealTimeEmergencySystem implements OperationStartedListener {
      * RealTimeEmergencySystem unit setter
      * @param unit
      */
-    public void setUnit(char unit) throws InvalidParameterException {
-        if(unit != 's' || unit != 'm' || unit != 'h') {
-            throw new InvalidParameterException();
-        }
-
+    public void setUnit(char unit) {
         this.unit = unit;
     }
 

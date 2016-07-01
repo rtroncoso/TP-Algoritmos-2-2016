@@ -137,6 +137,16 @@ public class Clinic implements
     }
 
     /**
+     * Adds a new administrative employees to the clinic
+     * @param administrative
+     * @return Clinic self-reference for chaining methods
+     */
+    public Clinic addAdministrative(Administrative administrative) {
+        this.administratives.add(administrative);
+        return this;
+    }
+
+    /**
      * Obtains a free stretcher from the stretchers pool
      * @return Administrative
      */
@@ -207,27 +217,11 @@ public class Clinic implements
     }
 
     /**
-     * Clinic dispatcher setter
-     * @param dispatcher
-     */
-    public void setDispatcher(Dispatcher dispatcher) {
-        this.dispatcher = dispatcher;
-    }
-
-    /**
      * Clinic SATSystem getter
      * @return SATSystem
      */
     public SATSystem getSatSystem() {
         return satSystem;
-    }
-
-    /**
-     * Clinic SATSystem setter
-     * @param satSystem
-     */
-    public void setSatSystem(SATSystem satSystem) {
-        this.satSystem = satSystem;
     }
 
     /**
