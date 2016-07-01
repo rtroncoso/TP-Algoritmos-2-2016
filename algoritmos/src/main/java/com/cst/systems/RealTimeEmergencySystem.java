@@ -1,8 +1,11 @@
 package com.cst.systems;
 
+import com.cst.events.listeners.OperationStartedListener;
 import com.cst.model.clinic.Clinic;
+import com.cst.model.clinic.Operation;
 import com.cst.systems.tasks.EmergencyStartTask;
 import com.cst.systems.tasks.HourElapsedTask;
+import com.cst.systems.tasks.OperationFinishTask;
 
 import java.security.InvalidParameterException;
 import java.util.*;
@@ -10,7 +13,7 @@ import java.util.*;
 /**
  * RealTimeEmergencySystem class
  */
-public abstract class RealTimeEmergencySystem {
+public class RealTimeEmergencySystem implements OperationStartedListener {
 
     /** Stores the tasks to be run by this system */
     private List<TimerTask> tasks = new ArrayList<TimerTask>();
@@ -56,7 +59,7 @@ public abstract class RealTimeEmergencySystem {
      * @param task
      * @param time
      */
-    public void addTask(TimerTask task, int time) {
+    public void addTask(TimerTask task, double time) {
         this.timer.schedule(task, this.getMilliseconds(time));
         this.tasks.add(task);
     }
@@ -67,14 +70,24 @@ public abstract class RealTimeEmergencySystem {
      * object.
      * @param hours
      */
-    public long getMilliseconds(int hours) {
+    public long getMilliseconds(double hours) {
         switch(this.unit) {
-            case 'h': return hours * this.step * 60 * 60 * 1000;
-            case 'm': return hours * this.step * 60 * 1000;
-            case 's': return hours * this.step * 1000;
+            case 'h': return (long) (hours * this.step * 60 * 60 * 1000);
+            case 'm': return (long) (hours * this.step * 60 * 1000);
+            case 's': return (long) (hours * this.step * 1000);
         }
 
         throw new InvalidParameterException();
+    }
+
+    /**
+     * Waits for an operation to start to create it's
+     * finishing task
+     * @param operation
+     */
+    public void onOperationStarted(Operation operation) {
+        this.addTask(new OperationFinishTask(this, operation),
+                this.getMilliseconds(OperationFinishTask.OPERATION_DURATION));
     }
 
     /**

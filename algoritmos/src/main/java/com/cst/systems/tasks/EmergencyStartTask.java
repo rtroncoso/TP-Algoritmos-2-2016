@@ -7,11 +7,8 @@ import com.cst.model.clinic.Trip;
 import com.cst.model.patient.Patient;
 import com.cst.systems.RealTimeEmergencySystem;
 import com.cst.util.RandomNumber;
-import com.github.javafaker.Faker;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Random;
 
 /**
  * EmergencyStartTask class
@@ -50,6 +47,13 @@ public class EmergencyStartTask extends HourElapsedTask {
                 Trip trip = this.rteSystem.getClinic().getSatSystem().startEmergency(
                     RandomNumber.get(1, this.MAX_EMERGENCY_DISTANCE), patients,
                     this.rteSystem.getTime()
+                );
+
+                this.rteSystem.addTask(
+                    new DistanceTravelledTask(this.rteSystem, trip),
+                    this.rteSystem.getMilliseconds(
+                        DistanceTravelledTask.HOUR_DURATION * .1 // 10 minutes per kilometer
+                    )
                 );
             } catch (CallAlreadyDispatched callAlreadyDispatched) {
             }
