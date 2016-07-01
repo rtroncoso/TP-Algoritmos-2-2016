@@ -48,7 +48,7 @@ public class RealTimeEmergencyMenu implements
         this.clinic.getDispatcher().listen(OperationFinished.class, this);
 
         // Step one hour every 10 seconds
-        this.rteSystem = new RealTimeEmergencySystem(this.clinic, 1, 's');
+        this.rteSystem = new RealTimeEmergencySystem(this.clinic, 10, 's');
         this.addStretchers();
         this.addAdministratives();
         this.addDoctors();
@@ -64,7 +64,7 @@ public class RealTimeEmergencyMenu implements
      * Adds dummy doctors to the system
      */
     private void addDoctors() {
-        for(int i=0; i < RandomNumber.get(1, 4); i++) {
+        for(int i=0; i < RandomNumber.get(2, 4); i++) {
             Doctor doctor = new DoctorFactory().create();
             this.clinic.addDoctor(doctor);
             this.print("Agregado un doctor a la clinica: " + doctor.getName() +

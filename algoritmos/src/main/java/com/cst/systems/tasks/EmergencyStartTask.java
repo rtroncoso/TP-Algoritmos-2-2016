@@ -41,7 +41,7 @@ public class EmergencyStartTask extends HourElapsedTask {
         if(this.percentageChance(this.EMERGENCY_CHANCE_FACTOR)) {
             ArrayList<Patient> patients = new ArrayList<Patient>();
 
-            for(int i=0; i < RandomNumber.get(1, 3); i++) {
+            for(int i=0; i < RandomNumber.get(1, 2); i++) {
                 patients.add(new PatientFactory().create());
             }
 
