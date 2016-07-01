@@ -12,14 +12,14 @@ decide que hacer dependiendo de factores de probabilidad pseudo-aleatorios dados
 
 Los integrantes del equipo son:
  
- - Tomas Sevillano - [https://github.com/tsevillano](@tsevillano)
- - Alejandro Ciatti - [https://github.com/alejandrociatti](@alejandrociatti)
- - Rodrigo Troncoso - [https://github.com/rtroncoso](@rtroncoso)
+ - Tomas Sevillano - [@tsevillano](https://github.com/tsevillano)
+ - Alejandro Ciatti - [@alejandrociatti](https://github.com/alejandrociatti)
+ - Rodrigo Troncoso - [@rtroncoso](https://github.com/rtroncoso)
 
 # Instalación y ejecución
 
 El proyecto requiere Maven para ser instalado y ejecutado, una vez instalado Maven los pasos para ejecutar
-el proyecto son:
+el proyecto son los siguientes:
 
 ### Desde una terminal
 
