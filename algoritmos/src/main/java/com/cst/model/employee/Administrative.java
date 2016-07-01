@@ -13,6 +13,12 @@ public class Administrative extends Employee {
     /** Bonus to be added to Administrative employees for calculations */
     public static final int CALCULATION_BONUS = 50;
 
+    /** Discount for each hour not worked by this employee */
+    public static final int HOUR_NOT_WORKED_DISCOUNT = 10;
+
+    /** Defines the amount of hours this employee has worked */
+    private int hoursWorked;
+
     /**
      * Administrative constructor
      *
@@ -31,6 +37,21 @@ public class Administrative extends Employee {
     public double calculate(Visit visit) {
         this.addSalary(Administrative.CALCULATION_BONUS);
         return visit.getPatient().getAge() * Administrative.BASE_MINOR_VISIT_PRICE;
+    }
+
+    /**
+     * Gets the amount of hours worked by this employee
+     * @return
+     */
+    public int getWorkedHous() {
+        return hoursWorked;
+    }
+
+    /**
+     * Adds an hour to the amount of hours worked of this employee
+     */
+    public void addWorkedHour() {
+        this.hoursWorked++;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.cst.model.employee;
 
+import com.cst.events.EmployeePayday;
 import com.cst.model.clinic.Clinic;
 
 /**
@@ -42,6 +43,15 @@ public abstract class Employee {
         this.baseSalary = baseSalary;
         this.salary = baseSalary;
         this.name = name;
+    }
+
+    /**
+     * Notifies this employee that it's being paid for the month
+     */
+    public double payday() {
+        double amountToPay = this.salary + this.baseSalary; // add up current salary to base monthly salary
+        this.salary = 0; // reset current salary back to 0
+        return amountToPay;
     }
 
     /**

@@ -15,6 +15,7 @@ public class MainMenu extends Menu {
     public MainMenu(){
         this.title = "Menu Principal";
         this.options = new ArrayList<String>(3);
+        this.options.add("Empezar sistema de emergencias automatizado.");
         this.options.add("Personal");
         this.options.add("Pacientes");
         this.options.add("Ambulancia");
@@ -25,12 +26,18 @@ public class MainMenu extends Menu {
     @Override
     protected void menu(int opt) {
         switch (opt) {
-            case 1: loadPersonnelMenu(); break;
-            case 2: loadPatientsMenu(); break;
-            case 3: loadAmbulanceMenu(); break;
-            case 4: quit(); break;
+            case 1: loadEmergencySystem(); break;
+            case 2: loadPersonnelMenu(); break;
+            case 3: loadPatientsMenu(); break;
+            case 4: loadAmbulanceMenu(); break;
+            case 5: quit(); break;
             default: invalidOption(); break;
         }
+    }
+
+    private void loadEmergencySystem() {
+        clearScreen();
+        new RealTimeEmergencyMenu();
     }
 
     private void loadPersonnelMenu(){

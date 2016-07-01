@@ -14,7 +14,6 @@ import com.cst.systems.SATSystem;
 import com.cst.util.JoinList;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -231,6 +230,18 @@ public class Clinic implements
         this.satSystem = satSystem;
     }
 
+    /**
+     * Returns the list of administrative employees in this clinic
+     * @return
+     */
+    public List<Administrative> getAdministratives() {
+        return this.administratives;
+    }
+
+    /**
+     * Returns a list of all the employees in this clinic
+     * @return
+     */
     public List<Employee> getEmployees(){
         return new JoinList<Employee>(new JoinList<Employee>(this.doctors, this.stretchers), this.administratives);
     }

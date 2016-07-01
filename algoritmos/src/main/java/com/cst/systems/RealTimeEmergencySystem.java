@@ -1,5 +1,7 @@
 package com.cst.systems;
 
+import com.cst.events.OperationStarted;
+import com.cst.events.TripFinished;
 import com.cst.events.listeners.OperationStartedListener;
 import com.cst.model.clinic.Clinic;
 import com.cst.model.clinic.Operation;
@@ -52,6 +54,7 @@ public class RealTimeEmergencySystem implements OperationStartedListener {
     public void start() {
         this.addTask(new HourElapsedTask(this), HourElapsedTask.HOUR_DURATION);
         this.addTask(new EmergencyStartTask(this), HourElapsedTask.HOUR_DURATION);
+        this.getClinic().getDispatcher().listen(OperationStarted.class, this);
     }
 
     /**
